@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U-Life｜大健康事業招商系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background: #0a0e14; color: #e2e8f0; scroll-behavior: smooth; }
+        .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #f7e7b4 50%, #d4af37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .bg-gold { background: linear-gradient(135deg, #d4af37 0%, #f7e7b4 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.4s; }
+        .glass-card:hover { border: 1px solid rgba(212, 175, 55, 0.5); transform: translateY(-10px); }
+        .hero-bg { background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent); }
+        .btn-gold { background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); color: #000; font-weight: 900; transition: all 0.3s; cursor: pointer; }
+        .btn-gold:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+        .btn-outline-gold { border: 1px solid #d4af37; color: #d4af37; font-weight: 700; transition: all 0.3s; }
+        .btn-outline-gold:hover { background: rgba(212, 175, 55, 0.1); transform: scale(1.05); }
+        .tech-pill { border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 99px; font-size: 12px; letter-spacing: 1px; }
+    </style>
+</head>
+<body class="hero-bg">
+
+    <!-- 導航欄 -->
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-[#0a0e14]/90 backdrop-blur-md border-b border-white/5">
+        <div class="text-xl font-black tracking-tighter"><span class="text-[#d4af37]">U-Life</span> SYSTEM</div>
+        <div class="hidden lg:flex gap-8 text-xs font-bold tracking-widest text-gray-400 uppercase">
+            <a href="#vision" class="hover:text-[#d4af37] transition">品牌願景</a>
+            <a href="#tech" class="hover:text-[#d4af37] transition">核心科技</a>
+            <a href="#contact" class="hover:text-[#d4af37] transition">聯繫總監</a>
+        </div>
+        <div class="flex gap-3">
+            <a href="https://portaly.cc/Peggychen1112" target="_blank" class="hidden sm:flex btn-outline-gold px-4 py-2 rounded-full text-[10px] items-center gap-2">
+                <i class="fa-solid fa-link"></i> 個人入口
+            </a>
+            <button onclick="window.open('https://line.me', '_blank')" class="btn-gold px-6 py-2 rounded-full text-[10px]">一對一諮詢</button>
+        </div>
+    </nav>
+
+    <!-- 首屏：視覺與品牌定調 -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
+        <div class="tech-pill mb-6 text-[#d4af37] font-bold">U-LIFE HEALTH SYSTEM × ZI-TONG</div>
+        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+            讓美業從體力勞動<br><span class="gold-gradient">進化為科技獲利系統</span>
+        </h1>
+        <p class="max-w-2xl text-gray-400 text-lg mb-10 leading-relaxed font-light">
+            我們整合遠紅外線熱導技術、負離子修復與 AI 智慧，<br>為美業技術導師量身打造「優雅獲利」的招商模型。
+        </p>
+        
+        <!-- 核心聯繫矩陣 (整合 Portaly 功能) -->
+        <div class="flex flex-col gap-6 items-center">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="document.getElementById('vision').scrollIntoView()" class="btn-gold px-12 py-4 rounded-full text-lg shadow-2xl">了解招商計畫</button>
+                <a href="https://www.facebook.com/share/1DcHC92W6p/?mibextid=wwXIfr" target="_blank" class="btn-outline-gold w-14 h-14 rounded-full flex items-center justify-center text-xl shadow-lg transition hover:scale-110">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://portaly.cc/Peggychen1112" target="_blank" class="btn-outline-gold w-14 h-14 rounded-full flex items-center justify-center text-xl shadow-lg transition hover:scale-110">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+            <div class="text-gray-500 text-xs font-bold tracking-[0.3em] uppercase opacity-50">Explore Social Evidence</div>
+        </div>
+    </section>
+
+    <!-- 品牌願景：擊中痛點 -->
+    <section id="vision" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div class="glass-card p-10 rounded-[3rem]">
+                <div class="w-12 h-12 bg-gold rounded-2xl mb-6 mx-auto md:mx-0 flex items-center justify-center text-black text-2xl"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                <h3 class="text-xl font-bold mb-4">保護老師雙手</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">不再靠雙手拼命。透過熱導技術降低 70% 體力消耗，保護您的職業壽命。</p>
+            </div>
+            <div class="glass-card p-10 rounded-[3rem]">
+                <div class="w-12 h-12 bg-gold rounded-2xl mb-6 mx-auto md:mx-0 flex items-center justify-center text-black text-2xl"><i class="fa-solid fa-users-gear"></i></div>
+                <h3 class="text-xl font-bold mb-4">解決缺工痛點</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">標準化、系統化的熱導設備操作，不再擔心技術人員離職影響經營。</p>
+            </div>
+            <div class="glass-card p-10 rounded-[3rem]">
+                <div class="w-12 h-12 bg-gold rounded-2xl mb-6 mx-auto md:mx-0 flex items-center justify-center text-black text-2xl"><i class="fa-solid fa-chart-line"></i></div>
+                <h3 class="text-xl font-bold mb-4">極速客製招商</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">利用內建 AI 軍師產出高轉化文案，精準對接大健康藍海市場商機。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心科技矩陣 -->
+    <section id="tech" class="py-24 bg-white/5 border-y border-white/5 px-6">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-4xl font-black gold-gradient mb-4">科技賦能・五大核心</h2>
+            <p class="text-gray-400">跨界整合，打造同業無法超越的技術壁壘</p>
+        </div>
+        <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+            <div class="text-center group">
+                <i class="fa-solid fa-sun text-3xl text-gray-500 group-hover:text-[#d4af37] mb-4 transition"></i>
+                <h4 class="text-xs font-bold text-gray-400">遠紅外線</h4>
+            </div>
+            <div class="text-center group">
+                <i class="fa-solid fa-wind text-3xl text-gray-500 group-hover:text-[#d4af37] mb-4 transition"></i>
+                <h4 class="text-xs font-bold text-gray-400">負離子</h4>
+            </div>
+            <div class="text-center group">
+                <i class="fa-solid fa-brain text-3xl text-gray-500 group-hover:text-[#d4af37] mb-4 transition"></i>
+                <h4 class="text-xs font-bold text-gray-400">AI 智慧</h4>
+            </div>
+            <div class="text-center group">
+                <i class="fa-solid fa-house-medical text-3xl text-gray-500 group-hover:text-[#d4af37] mb-4 transition"></i>
+                <h4 class="text-xs font-bold text-gray-400">健康生活</h4>
+            </div>
+            <div class="text-center group">
+                <i class="fa-solid fa-plug-glow text-3xl text-gray-500 group-hover:text-[#d4af37] mb-4 transition"></i>
+                <h4 class="text-xs font-bold text-gray-400">熱導設備</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- 總監入口：聯繫區 -->
+    <section id="contact" class="py-32 px-6 max-w-4xl mx-auto text-center">
+        <div class="mb-12 relative inline-block">
+            <div class="w-48 h-48 rounded-full border-4 border-[#d4af37] mx-auto overflow-hidden bg-gray-900 shadow-[0_0_60px_rgba(212,175,55,0.2)]">
+                <!-- 總監形象照預留區 -->
+                <img src="https://via.placeholder.com/200/d4af37/000000?text=U-Life+Zi-Tong" alt="小彤總監">
+            </div>
+            <div class="absolute -bottom-2 -right-2 bg-gold text-black text-[10px] font-black px-4 py-1 rounded-full shadow-lg italic uppercase tracking-tighter">Chief Director</div>
+        </div>
+        
+        <h2 class="text-3xl font-black mb-8 italic">「不賣機器，我們傳承的是成功獲利模組。」</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button onclick="window.open('https://line.me', '_blank')" class="btn-gold py-5 rounded-2xl flex items-center justify-center gap-3 shadow-xl">
+                <i class="fa-brands fa-line text-2xl"></i> 一對一事業對接
+            </button>
+            <a href="https://portaly.cc/Peggychen1112" target="_blank" class="btn-outline-gold py-5 rounded-2xl flex items-center justify-center gap-3">
+                <i class="fa-solid fa-id-card"></i> 瀏覽完整個人資訊
+            </a>
+        </div>
+        
+        <div class="mt-12 flex justify-center gap-8">
+            <a href="https://www.facebook.com/share/1DcHC92W6p/?mibextid=wwXIfr" target="_blank" class="text-gray-600 hover:text-[#d4af37] transition text-2xl"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://portaly.cc/Peggychen1112" target="_blank" class="text-gray-600 hover:text-[#d4af37] transition text-2xl"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </section>
+
+    <!-- 頁腳 -->
+    <footer class="py-16 border-t border-white/5 text-center text-gray-600 text-[10px] tracking-[0.4em] uppercase">
+        &copy; 2026 U-LIFE HEALTH SYSTEM. DESIGNED FOR THE ELITE.
+    </footer>
+
+</body>
+</html>
