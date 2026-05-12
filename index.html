@@ -3,27 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U-Life｜實體店舖 AI 品牌升級</title>
+    <title>U-Life｜實體店舖 AI 品牌轉型系統</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background: #fff; color: #000; overflow-x: hidden; }
+        body { font-family: 'Noto Sans TC', sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
         
-        /* 手機優先：極簡漸層遮罩 */
-        .mobile-mask {
-            background: linear-gradient(
-                to right,
-                rgba(255,255,255,1) 0%,
-                rgba(255,255,255,0.95) 45%,
-                rgba(255,255,255,0) 100%
-            );
-        }
-
-        /* 模特兒保護：人物位移 65% */
-        .hero-img {
-            object-fit: cover;
-            object-position: 65% center;
+        .hero-mask {
+            background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 45%, rgba(255,255,255,0) 100%);
         }
 
         .gold-gradient {
@@ -32,109 +20,113 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-link { font-size: 10px; font-weight: 900; letter-spacing: 0.2em; color: #999; transition: 0.3s; }
-        .nav-link:hover { color: #000; }
+        .narrative-text { line-height: 2; letter-spacing: 0.05em; }
         
-        .section-title { font-size: 10px; font-weight: 900; letter-spacing: 0.5em; color: #ccc; text-transform: uppercase; margin-bottom: 2rem; }
+        .btn-core {
+            background: #000;
+            color: #fff;
+            padding: 1.5rem 3rem;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-core:hover { background: #d4af37; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2); }
+
+        .evidence-box { border: 1px solid #f0f0f0; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
     </style>
 </head>
 <body>
 
-    <!-- 頂層導航：多頁面入口 -->
-    <nav class="fixed w-full z-50 px-6 py-6 flex justify-between items-center bg-white/80 backdrop-blur-md">
-        <div class="text-xl font-black tracking-tighter">U-Life <span class="font-light">SYSTEM</span></div>
-        
-        <!-- 隱藏式選單 (PC顯示) -->
-        <div class="hidden lg:flex gap-10">
-            <a href="#services" class="nav-link">SERVICES</a>
-            <a href="#case" class="nav-link">CASE STUDY</a>
-            <a href="#" class="nav-link">ABOUT</a>
-            <a href="#" class="nav-link">AI VIDEO</a>
-        </div>
-
-        <button onclick="window.open('https://line.me')" class="bg-black text-white px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase">Consult</button>
+    <!-- 導航 -->
+    <nav class="fixed w-full z-50 px-8 py-8 flex justify-between items-center bg-white/60 backdrop-blur-xl">
+        <div class="text-xl font-black tracking-tighter">U-Life <span class="font-light text-gray-400">SYSTEM</span></div>
+        <button onclick="window.open('https://line.me')" class="text-[10px] font-black border-b-2 border-black pb-1 hover:text-[#d4af37] hover:border-[#d4af37] transition">CONSULTATION</button>
     </nav>
 
-    <!--第一層：氣場 Hero (負責吸引) -->
-    <section class="relative min-h-screen w-full flex items-center">
+    <!-- 第一層：電影化 Hero -->
+    <section class="relative min-h-screen flex items-center">
         <div class="absolute inset-0 z-0">
+            <!-- 未來放置小彤總監的工作側拍影片 -->
             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop" 
-                 class="hero-img w-full h-full grayscale opacity-40 md:opacity-100">
-            <div class="absolute inset-0 mobile-mask z-10"></div>
+                 class="w-full h-full object-cover grayscale opacity-30 md:opacity-90 md:object-right" style="object-position: 65% center;">
+            <div class="absolute inset-0 hero-mask z-10"></div>
         </div>
 
-        <div class="relative z-20 container mx-auto px-6">
-            <p class="text-[10px] font-black tracking-[0.4em] text-gray-300 mb-4 uppercase">U-LIFE SYSTEM / 2026</p>
-            <h1 class="text-5xl leading-[0.95] font-black tracking-tighter md:text-[110px] mb-8">
-                實體店舖<br><span class="gold-gradient">AI 品牌升級</span>
+        <div class="relative z-20 container mx-auto px-8">
+            <p class="text-[10px] font-black tracking-[0.5em] text-gray-300 mb-6 uppercase">U-LIFE DIRECTOR / ZI-TONG</p>
+            <h1 class="text-5xl md:text-[110px] leading-[0.95] font-black tracking-tighter mb-8">
+                實體店舖<br><span class="gold-gradient">AI 品牌轉型</span>
             </h1>
-            <p class="text-gray-500 text-sm md:text-lg max-w-xs mb-10 leading-relaxed font-medium">
-                幫店家建立真正會成交的 AI 品牌。
+            <p class="narrative-text text-gray-500 max-w-sm mb-12 text-sm md:text-lg">
+                幫助美業技術老師與實體店長，<br>將傳統服務轉化為具備 AI 競爭力的獲利系統。<br>這是對健康與事業的雙重賦能。
             </p>
-            <button onclick="document.getElementById('services').scrollIntoView()" class="bg-black text-white px-12 py-5 text-lg font-black tracking-widest shadow-2xl">
-                START HERE
+            <button onclick="document.getElementById('evidence').scrollIntoView()" class="btn-core">
+                VIEW REAL EVIDENCE
             </button>
         </div>
     </section>
 
-    <!-- 第二層：三大服務 (負責專業入口) -->
-    <section id="services" class="py-32 px-6">
-        <div class="container mx-auto">
-            <p class="section-title text-center">Core Services</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="group cursor-pointer">
-                    <h3 class="text-2xl font-black mb-4 group-hover:text-[#d4af37] transition">AI 品牌官網</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">建立具備「真實世界感」的獲利閉環。</p>
-                    <a href="#" class="text-[10px] font-black border-b border-black pb-1">LEARN MORE</a>
+    <!-- 第二層：真實數據截圖區 -->
+    <section id="evidence" class="py-40 px-8 container mx-auto">
+        <div class="max-w-4xl mb-20">
+            <p class="text-[10px] font-black tracking-[0.5em] text-gray-300 mb-6 uppercase">Real-World Evidence</p>
+            <h2 class="text-4xl font-black leading-tight italic mb-6">「數據，是唯一的誠實。」</h2>
+            <p class="text-gray-400 narrative-text">這裡展示的是真實客戶的 Google 商家成長與 IG 內容轉化。我們拒絕模擬，只看結果。</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="evidence-box p-4">
+                <div class="aspect-video bg-gray-50 flex items-center justify-center text-gray-300 text-[10px] font-black">
+                    [ 插入實體店 Google 商家點擊成長圖 ]
                 </div>
-                <div class="group cursor-pointer border-t md:border-t-0 md:border-l border-gray-100 pt-12 md:pt-0 md:pl-12">
-                    <h3 class="text-2xl font-black mb-4 group-hover:text-[#d4af37] transition">AI 短影音矩陣</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">用極速內容爆發力，精準對接大健康市場。</p>
-                    <a href="#" class="text-[10px] font-black border-b border-black pb-1">WATCH CASE</a>
+                <p class="mt-6 text-xs font-black tracking-widest text-gray-400">GOOGLE BUSINESS GROWTH / CASE STUDY</p>
+            </div>
+            <div class="evidence-box p-4">
+                <div class="aspect-video bg-gray-50 flex items-center justify-center text-gray-300 text-[10px] font-black">
+                    [ 插入小彤總監 IG Reels 數據截圖 ]
                 </div>
-                <div class="group cursor-pointer border-t md:border-t-0 md:border-l border-gray-100 pt-12 md:pt-0 md:pl-12">
-                    <h3 class="text-2xl font-black mb-4 group-hover:text-[#d4af37] transition">健康科技賦能</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">結合專利遠紅外線與負離子，升級實體空間。</p>
-                    <a href="#" class="text-[10px] font-black border-b border-black pb-1">EXPLORE TECH</a>
+                <p class="mt-6 text-xs font-black tracking-widest text-gray-400">SOCIAL MEDIA REACH / 50K+ VIEWS REACH</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第三層：總監理念 (人生痕跡修正) -->
+    <section id="story" class="py-40 bg-gray-50 px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="w-full md:w-1/3">
+                    <div class="aspect-[3/4] bg-gray-200 grayscale shadow-2xl">
+                        <!-- 建議放置小彤總監在操作熱導設備或工作的專業形象照 -->
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <h2 class="text-3xl font-black mb-8 italic">「讓有價值的技術，被時代重新看見。」</h2>
+                    <p class="narrative-text text-gray-500 mb-8 text-sm">
+                        我是小彤，U-Life 推廣總監。我看過無數美業老師在技術與體力之間掙扎，也看過傳統店家在數位浪潮中迷失。我投身 U-Life 的使命，是為了讓像您一樣擁有深厚技術的老師，能透過 AI 品牌與高效科技設備，找回事業的掌控權與優雅獲利的能力。
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-[1px] bg-black"></div>
+                        <span class="text-xs font-black tracking-widest italic uppercase">ZI-TONG / U-Life Director</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 第三層：單一案例 (負責信任引導) -->
-    <section id="case" class="py-32 bg-gray-50 px-6">
-        <div class="container mx-auto">
-            <p class="section-title text-center">The Evidence</p>
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="w-full md:w-1/2">
-                    <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop" 
-                         class="w-full grayscale hover:grayscale-0 transition duration-700 shadow-2xl">
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h2 class="text-4xl font-black mb-6 leading-tight italic">「從體力勞動到科技獲利。」</h2>
-                    <p class="text-gray-500 mb-8 leading-relaxed">美業導師透過 U-Life 系統，在 3 個月內實現招商自動化。這不是機器，是獲利模組。</p>
-                    <button class="btn-outline-black border-2 border-black px-10 py-4 font-black tracking-widest text-sm hover:bg-black hover:text-white transition">
-                        VIEW MORE CASES
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 第四層：極簡 CTA (負責成交跳轉) -->
-    <section class="py-32 px-6 text-center">
-        <h2 class="text-4xl font-black mb-12 tracking-tighter">Ready for the Future?</h2>
-        <button onclick="window.open('https://line.me')" class="bg-black text-white px-16 py-6 text-xl font-black tracking-[0.2em] shadow-2xl">
-            PRE-BOOKING
+    <!-- 第四層：成交跳轉 -->
+    <section class="py-40 px-8 text-center bg-white">
+        <h2 class="text-4xl font-black mb-12 tracking-tighter">準備好開啟您的轉型計畫嗎？</h2>
+        <button onclick="window.open('https://line.me')" class="btn-core">
+            BOOK A PRIVATE CALL
         </button>
-        <div class="mt-12 flex justify-center gap-10">
-            <a href="https://www.facebook.com/share/1DcHC92W6p/" class="text-gray-300 hover:text-black transition"><i class="fa-brands fa-facebook text-xl"></i></a>
-            <a href="https://portaly.cc/Peggychen1112" class="text-gray-300 hover:text-black transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+        <div class="mt-16 flex justify-center gap-12">
+            <a href="https://www.facebook.com/share/1DcHC92W6p/" target="_blank" class="text-gray-300 hover:text-black transition"><i class="fa-brands fa-facebook text-2xl"></i></a>
+            <a href="https://portaly.cc/Peggychen1112" target="_blank" class="text-gray-300 hover:text-black transition"><i class="fa-brands fa-instagram text-2xl"></i></a>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-gray-300 text-[8px] font-black tracking-[0.5em] uppercase border-t border-gray-50">
-        &copy; 2026 U-LIFE HEALTH SYSTEM. LESS IS LUXURY.
+    <footer class="py-20 border-t border-gray-50 text-center">
+        <p class="text-[8px] font-black tracking-[0.8em] text-gray-300 uppercase">U-Life Health System / Dedicated to Excellence</p>
     </footer>
 
 </body>
