@@ -8,144 +8,140 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 致敬 S__59834739_2.jpg 的深綠科技底調 */
         body { 
             font-family: 'Noto Sans TC', sans-serif; 
-            background: #040d0a; /* 純深綠底色 */
-            background-image: radial-gradient(circle at 50% 30%, #0a2f1f 0%, #040d0a 80%);
-            color: #ffffff; 
+            background: #ffffff; 
+            background-image: radial-gradient(#f7e7b4 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            color: #1a202c; 
             scroll-behavior: smooth; 
             overflow-x: hidden; 
         }
         
-        /* 修正字距與張力 */
+        /* 緊湊字距校正 */
         h1 { letter-spacing: -0.05em !important; line-height: 1.1; }
         h2, h3 { letter-spacing: -0.02em !important; }
-        p { letter-spacing: -0.01em !important; line-height: 1.6; }
+        p { letter-spacing: -0.01em !important; line-height: 1.8; }
 
-        .gold-text { background: linear-gradient(135deg, #d4af37 0%, #f7e7b4 50%, #d4af37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-gradient { background: linear-gradient(135deg, #b8860b 0%, #d4af37 50%, #b8860b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* 玻璃質感卡片 */
+        /* 白金質感卡片 */
         .glass-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(15px); 
+            background: #ffffff; 
             border: 1px solid rgba(212, 175, 55, 0.2); 
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.05);
         }
         .glass-card:hover { 
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15);
             border-color: #d4af37;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.1); 
         }
 
-        /* 能量發光按鈕 */
-        .btn-gold { 
-            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); 
-            color: #000; font-weight: 900; 
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            cursor: pointer; border: none; 
-        }
-        .btn-gold:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); }
-
-        /* 彩色品牌 ICON */
-        .social-link { transition: all 0.3s ease; }
-        .social-link:hover { transform: scale(1.3) rotate(5deg); }
+        /* 社交 ICON 品牌原色 */
         .icon-fb { color: #1877F2; }
         .icon-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .icon-threads { color: #ffffff; }
+        .icon-threads { color: #000000; }
+        .social-link { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .social-link:hover { transform: scale(1.3) rotate(8deg); }
 
-        /* 背景裝飾能量環 */
-        .energy-circle {
+        .btn-gold { 
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); 
+            color: #ffffff; font-weight: 900; 
+            transition: all 0.3s;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
+        }
+        .btn-gold:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        /* 能量裝飾環 */
+        .energy-aura {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 600px; height: 600px; border: 1px solid rgba(212, 175, 55, 0.05);
-            border-radius: 50%; z-index: -1; pointer-events: none;
+            width: 80vw; height: 80vw; max-width: 800px; max-height: 800px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            z-index: -1; pointer-events: none;
         }
     </style>
 </head>
 <body>
 
     <!-- 導航欄 -->
-    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-[#040d0a]/90 backdrop-blur-md border-b border-white/5">
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-white/95 backdrop-blur-md border-b border-gray-100">
         <div class="flex items-center gap-2">
-            <span class="text-xl font-black tracking-tighter italic text-[#d4af37]">U-LIFE <span class="text-white">SYSTEM</span></span>
+            <span class="text-xl font-black tracking-tighter italic">U-LIFE <span class="text-[#d4af37]">SYSTEM</span></span>
         </div>
-        <button onclick="window.open('https://lin.ee/WOuB6V2', '_blank')" class="btn-gold px-6 py-2 rounded-full text-[10px] uppercase tracking-widest">對接總監</button>
+        <button onclick="window.open('https://lin.ee/WOuB6V2', '_blank')" class="btn-gold px-8 py-2.5 rounded-full text-[11px] uppercase tracking-widest">對接總監</button>
     </nav>
 
-    <!-- 首屏：電腦橫向/手機直向全優化 -->
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 relative overflow-hidden">
-        <div class="energy-circle animate-pulse"></div>
+    <!-- 首屏：白金極簡視覺 -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 relative">
+        <div class="energy-aura animate-pulse"></div>
         
-        <div class="bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/40 px-4 py-1.5 rounded-sm font-black text-[10px] tracking-[0.3em] uppercase mb-10">
+        <div class="bg-[#fffcf0] text-[#b8860b] border border-[#f7e7b4] px-5 py-1.5 rounded-sm font-black text-[10px] tracking-[0.3em] uppercase mb-10">
             Taiwan Patented Technology
         </div>
         
-        <!-- 字距縮緊後的霸氣標題 -->
-        <h1 class="text-5xl md:text-[96px] font-black mb-8 leading-tight tracking-tighter">
-            美業技術<br><span class="gold-text italic">全自動化革命</span>
+        <h1 class="text-6xl md:text-[100px] font-black mb-10 text-gray-900">
+            美業技術<br><span class="gold-gradient italic">全自動化革命</span>
         </h1>
         
-        <p class="max-w-2xl text-gray-400 text-lg md:text-2xl mb-14 font-light px-4">
-            整合 <span class="text-white font-bold border-b border-[#d4af37]">台灣專利熱導健康調理</span> 與 <span class="text-white font-bold">AI智慧經營</span><br class="hidden md:block">
-            打造「<span class="text-[#d4af37] font-black">不靠雙手、持續獲利</span>」的頂級商業模型。
+        <p class="max-w-2xl text-gray-500 text-lg md:text-2xl mb-16 font-medium leading-tight">
+            整合 <span class="text-gray-900 font-black border-b-2 border-[#d4af37]">台灣專利熱導健康調理</span> 與 <span class="text-gray-900 font-black">AI智慧經營</span><br class="hidden md:block">
+            打造「<span class="text-[#b8860b] font-black">不靠雙手、持續獲利</span>」的頂級商業模型。
         </p>
         
-        <div class="flex flex-col md:flex-row gap-8 items-center justify-center w-full">
-            <button onclick="window.open('https://lin.ee/WOuB6V2', '_blank')" class="btn-gold px-12 py-5 rounded-full text-xl shadow-2xl font-black w-64 md:w-auto">啟動招商計畫</button>
+        <div class="flex flex-col md:flex-row gap-10 items-center justify-center mb-16">
+            <button onclick="window.open('https://lin.ee/WOuB6V2', '_blank')" class="btn-gold px-16 py-6 rounded-full text-2xl shadow-2xl font-black">啟動招商計畫</button>
             
-            <!-- 彩色社交按鈕：手機版自動排列 -->
-            <div class="flex items-center gap-6 px-8 py-4 bg-white/5 rounded-full backdrop-blur-md border border-white/10 shadow-xl">
+            <div class="flex items-center gap-8 px-10 py-5 bg-white rounded-full shadow-[0_5px_40px_rgba(212,175,55,0.15)] border border-gray-100">
                 <a href="https://www.facebook.com/share/1DcHC92W6p/" target="_blank" class="social-link text-3xl icon-fb"><i class="fa-brands fa-facebook"></i></a>
                 <a href="https://portaly.cc/Peggychen1112" target="_blank" class="social-link text-3xl icon-ig"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://www.threads.net/@peggychenqq" target="_blank" class="social-link text-3xl icon-threads"><i class="fa-brands fa-threads"></i></a>
-                <span class="text-[9px] text-gray-500 font-black uppercase tracking-[0.2em] border-l pl-5 border-white/10">Evidence</span>
+                <span class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] border-l pl-6 border-gray-200">Connect</span>
             </div>
         </div>
     </section>
 
-    <!-- 三大價值：手機版會自動轉為單欄顯示 -->
-    <section class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass-card p-10 rounded-[2.5rem] text-center md:text-left">
-                <div class="w-14 h-14 bg-[#d4af37]/20 text-[#d4af37] rounded-2xl mb-8 mx-auto md:mx-0 flex items-center justify-center text-3xl"><i class="fa-solid fa-certificate"></i></div>
-                <h3 class="text-2xl font-black mb-5 gold-text">台灣專利熱導調理</h3>
-                <p class="text-gray-400 text-sm font-light">榮獲台灣多項專利。透過獨家熱導頻率實現深層修復，建立您店鋪無法模仿的技術護城河。</p>
+    <!-- 三大價值模塊 -->
+    <section class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="glass-card p-12 rounded-[3rem] text-center md:text-left">
+                <div class="w-16 h-16 bg-[#fffcf0] text-[#d4af37] rounded-2xl mb-10 mx-auto md:mx-0 flex items-center justify-center text-4xl shadow-inner"><i class="fa-solid fa-certificate"></i></div>
+                <h3 class="text-2xl font-black mb-6 text-gray-900">台灣專利熱導科技</h3>
+                <p class="text-gray-500 leading-relaxed">獨家專利頻率深層修復，取代傳統耗時耗力的徒手操作，為您的技術生涯建立無法模仿的護城河。</p>
             </div>
-            <div class="glass-card p-10 rounded-[2.5rem] text-center md:text-left">
-                <div class="w-14 h-14 bg-[#d4af37]/20 text-[#d4af37] rounded-2xl mb-8 mx-auto md:mx-0 flex items-center justify-center text-3xl"><i class="fa-solid fa-brain"></i></div>
-                <h3 class="text-2xl font-black mb-5 gold-text">AI 智慧獲利系統</h3>
-                <p class="text-gray-400 text-sm font-light">整合 AI 自動化經營邏輯。協助您進行精準招商文案產出與店務管理，讓經營不再繁瑣。</p>
+            <div class="glass-card p-12 rounded-[3rem] text-center md:text-left">
+                <div class="w-16 h-16 bg-[#fffcf0] text-[#d4af37] rounded-2xl mb-10 mx-auto md:mx-0 flex items-center justify-center text-4xl shadow-inner"><i class="fa-solid fa-robot"></i></div>
+                <h3 class="text-2xl font-black mb-6 text-gray-900">AI 數位招商系統</h3>
+                <p class="text-gray-500 leading-relaxed">不再煩惱引流問題。AI 智慧軍師協助您產出精準招商文案與自動化管理，實現事業倍速擴張。</p>
             </div>
-            <div class="glass-card p-10 rounded-[2.5rem] text-center md:text-left">
-                <div class="w-14 h-14 bg-[#d4af37]/20 text-[#d4af37] rounded-2xl mb-8 mx-auto md:mx-0 flex items-center justify-center text-3xl"><i class="fa-solid fa-bolt"></i></div>
-                <h3 class="text-2xl font-black mb-5 gold-text">負離子能量修復</h3>
-                <p class="text-gray-400 text-sm font-light">打造「森林級」含氧空間。在修復顧客健康的同時，亦全方位優化操作者的能量狀態。</p>
+            <div class="glass-card p-12 rounded-[3rem] text-center md:text-left">
+                <div class="w-16 h-16 bg-[#fffcf0] text-[#d4af37] rounded-2xl mb-10 mx-auto md:mx-0 flex items-center justify-center text-4xl shadow-inner"><i class="fa-solid fa-leaf"></i></div>
+                <h3 class="text-2xl font-black mb-6 text-gray-900">高濃度負離子場域</h3>
+                <p class="text-gray-500 leading-relaxed">打造森林級含氧空間。在修復顧客健康的同時，亦全方位保護操作者的能量場域與身心健康。</p>
             </div>
         </div>
     </section>
 
-    <!-- 女神總監專區 -->
-    <section class="py-24 px-6 max-w-5xl mx-auto border-t border-white/5">
-        <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24">
-            <div class="w-64 h-64 md:w-96 md:h-96 relative flex-shrink-0">
+    <!-- 總監專區 -->
+    <section class="py-32 bg-gray-50/50">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-24">
+            <div class="w-full md:w-1/2 relative">
                 <div class="absolute inset-0 border-2 border-[#d4af37] translate-x-4 translate-y-4"></div>
-                <div class="absolute inset-0 bg-gray-900 overflow-hidden shadow-2xl">
-                    <!-- 這裡是女神總監小彤的形象照預留位置 -->
-                    <img src="https://via.placeholder.com/600/d4af37/ffffff?text=Zi-Tong" alt="小彤總監" class="w-full h-full object-cover">
+                <div class="aspect-square bg-gray-200 overflow-hidden shadow-2xl relative">
+                    <img src="https://via.placeholder.com/600/d4af37/ffffff?text=Chief+Director+Zi-Tong" alt="小彤總監" class="w-full h-full object-cover">
                 </div>
             </div>
-            <div class="text-center md:text-left">
-                <h2 class="text-sm font-black text-[#d4af37] mb-6 tracking-[0.5em] uppercase border-l-0 md:border-l-4 border-[#d4af37] md:pl-4">Chief Director</h2>
-                <h3 class="text-3xl md:text-5xl font-black mb-8 italic text-white leading-tight">「我們傳承的不是設備，<br>是解決美業痛點的贏家系統。」</h3>
-                <p class="text-gray-400 text-lg mb-10 font-light px-4 md:px-0">我是小彤，致力於將台灣最強專利熱導科技結合 AI，協助全台美業導師實踐「不耗體力、優雅獲利」的轉型夢想。</p>
-                <button onclick="window.open('https://lin.ee/WOuB6V2', '_blank')" class="btn-gold px-12 py-5 rounded-full text-xl font-black w-full md:w-auto">立即啟動事業對接</button>
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h2 class="text-sm font-black text-[#d4af37] mb-6 tracking-[0.5em] uppercase">The Visionary Leader</h2>
+                <h3 class="text-4xl md:text-5xl font-black text-gray-900 mb-10 italic leading-tight">「我不只賣設備，我給妳的是一套能讓妳翻身的獲利系統。」</h3>
+                <p class="text-gray-600 text-lg mb-12 font-light leading-relaxed">我是小彤，致力於將台灣最強專利熱導科技結合 AI 經營智慧，協助美業導師與店長實踐優雅獲利的轉型夢想。</p>
+                <button onclick="window.open('https://lin.ee/WOuB6V2', '_blank')" class="btn-gold px-14 py-5 rounded-full text-xl font-black uppercase">立即啟動事業對接</button>
             </div>
         </div>
     </section>
 
-    <footer class="py-16 text-center text-gray-600 text-[10px] tracking-[0.5em] uppercase">
-        &copy; 2026 U-LIFE HEALTH SYSTEM. DESIGNED FOR THE ELITE.
+    <footer class="py-20 text-center text-gray-400 text-[11px] tracking-[0.6em] uppercase">
+        &copy; 2026 U-LIFE HEALTH SYSTEM. DESIGNED FOR THE TOP 1% ELITE.
     </footer>
 
 </body>
