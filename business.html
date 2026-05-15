@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-Life｜核心技術與數位賦能系統</title>
+
+<style>
+:root{
+  --bg: #ffffff;
+  --card-bg: #f5f5f7;
+  --text: #1d1d1f;
+  --muted: #86868b;
+  --line: rgba(0, 0, 0, 0.08);
+  --gold: #b69146;
+  --blue: #0066cc;
+  --green: #008066;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Noto Sans TC", Arial, sans-serif;
+  letter-spacing: -0.022em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Apple 經典純白毛玻璃導覽列 */
+.nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner{
+  width: min(1024px, calc(100% - 32px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a{
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  margin-left: 24px;
+  transition: color 0.2s;
+  font-weight: 400;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--text);
+}
+
+.nav-links a.nav-cta {
+  background: #0071e3;
+  color: #fff;
+  padding: 4px 11px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 400;
+}
+.nav-links a.nav-cta:hover {
+  background: #0077ff;
+}
+
+/* Hero 頂級純白大留白開場 */
+.hero{
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 60px;
+  background: #ffffff;
+}
+
+.hero-inner{
+  width: min(800px, 100%);
+  animation: appleFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eyebrow{
+  color: var(--muted);
+  font-size: clamp(14px, 1.8vw, 19px);
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+h1{
+  margin: 0;
+  font-size: clamp(48px, 7.5vw, 88px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+.hero h1 span{
+  display: block;
+  color: var(--muted);
+}
+
+.hero p{
+  max-width: 620px;
+  margin: 28px auto 0;
+  color: var(--muted);
+  font-size: clamp(17px, 1.8vw, 21px);
+  line-height: 1.47;
+  font-weight: 400;
+}
+
+/* 蘋果工藝交錯章節（極簡白底） */
+.chapter{
+  min-height: 75vh;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 80px;
+  width: min(1024px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 100px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.chapter:nth-child(even){
+  direction: rtl;
+}
+
+.chapter:nth-child(even) .copy,
+.chapter:nth-child(even) .visual{
+  direction: ltr;
+}
+
+.kicker{
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+
+.chapter:nth-child(even) .kicker { color: var(--blue); }
+.chapter:nth-child(3) .kicker { color: var(--green); }
+
+.chapter h2{
+  margin: 0;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+.chapter p{
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.52;
+}
+
+.service-points{
+  margin-top: 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.point{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #1d1d1f;
+  font-size: 15px;
+}
+
+.point:before{
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text);
+}
+
+/* 經典 Apple 陶瓷白細緻卡片 */
+.visual{
+  position: relative;
+  min-height: 440px;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  border: 1px solid rgba(0,0,0,0.02);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visual:hover{
+  transform: scale(1.015);
+}
+
+.visual:after{
+  content: attr(data-icon);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 120px;
+}
+
+.visual-label{
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.visual-label strong{
+  display: block;
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: #1d1d1f;
+}
+
+.visual-label span{
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* 底部極簡呼籲 */
+.reserve{
+  text-align: center;
+  padding: 120px 24px;
+  background: #ffffff;
+}
+
+.reserve h2{
+  margin: 0;
+  font-size: clamp(38px, 5.5vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+.reserve p{
+  max-width: 580px;
+  margin: 24px auto 0;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.47;
+}
+
+/* 蘋果原生高質感深邃膠囊型按鈕 */
+.button{
+  margin-top: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: #1d1d1f;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.button:hover{
+  background: #0071e3;
+}
+
+.footer{
+  text-align: center;
+  color: #86868b;
+  padding: 32px 20px;
+  font-size: 12px;
+  border-top: 1px solid var(--line);
+  background: var(--card-bg);
+}
+
+@keyframes appleFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width:900px){
+  .chapter,
+  .chapter:nth-child(even){
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 40px;
+    min-height: auto;
+    padding: 60px 0;
+  }
+  .visual{ min-height: 320px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Apple 純白毛玻璃導覽列 -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">U-Life HEALTH SYSTEM</a>
+    <div class="nav-links">
+      <a href="index.html">身體重啟</a>
+      <a href="business.html" class="active">技術系統</a>
+      <a href="https://tclee0978-png.github.io/ulife-system/">AI 印鈔機</a>
+      <a href="index.html#reserve" class="nav-cta">立即預約</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">U-Life Core Technology Integration</div>
+    <h1>
+      全方位身體優化。
+      <span>用三大核心技術對接。</span>
+    </h1>
+    <p>
+      U-Life 是一個將「線下實體體感技術」與「線上 AI 數位引流」完美融合的現代健康系統。我們透過精準科學評估、深層溫熱循環與科技化行銷，提供現代人高階身體優化方案。
+    </p>
+  </div>
+</section>
+
+<main id="chapters">
+
+  <!-- CHAPTER 1 -->
+  <section class="chapter">
+    <div class="copy">
+      <div class="kicker">Chapter 1 / Static Recovery</div>
+      <h2>靜態熱導與循環修復技術</h2>
+      <p>
+        針對久坐、高壓體質設計。結合全身精準骨架評估，導入科學化的深層熱導放鬆與草本蒸足循環。透過空間能量與溫熱效應達到深度排汗與自律神經放鬆。
+      </p>
+      <div class="service-points">
+        <div class="point">精準骨架評估：姿勢平衡與核心壓力觀察，拒絕盲目推拿。</div>
+        <div class="point">深層溫熱循環：遠紅外線與負離子能量包覆，深度驅離疲勞。</div>
+        <div class="point">筋膜熱導放鬆：筋膜刀與熱導技術精準舒緩，徹底釋放肩頸壓力。</div>
+      </div>
+    </div>
+    <div class="visual" data-icon="💈">
+      <div class="visual-label">
+        <strong>深層物理修復。</strong>
+        <span>用科技與空間，讓身體在完全放鬆的靜態環境下，重新啟動循環與代謝。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 2 -->
+  <section class="chapter">
+    <div class="copy">
+      <div class="kicker">Chapter 2 / Dynamic Training</div>
+      <h2>高效能動態訓練技術</h2>
+      <p>
+        打破傳統健身房枯燥無聊、難以堅持的痛苦模式。引進高多巴胺、強烈畫面感的「三大高效燃脂課程」，在專業教練帶領下，以低關節衝擊、高能量互動的方式，實現體態與精力的雙重蛻變。
+      </p>
+      <div class="service-points">
+        <div class="point">蹦蹦跳床課程：高效多巴胺解壓派對，45分鐘極速燃脂釋放。</div>
+        <div class="point">TRX 懸吊訓練：利用自身體重激活全身深層核心，精雕核心線條。</div>
+        <div class="point">階梯有氧課程：無腦傻瓜燃脂王，配合音樂節奏大汗淋漓，釋放全面壓力。</div>
+      </div>
+    </div>
+    <div class="visual" data-icon="🏋️">
+      <div class="visual-label">
+        <strong>快樂，才是最強的減脂計畫。</strong>
+        <span>結合好玩、解壓與高效能，讓運動不再是負擔，職人級專業全程陪伴。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 3 -->
+  <section class="chapter">
+    <div class="copy">
+      <div class="kicker">Chapter 3 / Digital Automation</div>
+      <h2>AI 數位行銷與矩陣引流技術</h2>
+      <p>
+        這是 U-Life 體系最獨特的數位護城河。我們為所有旗下的實體店長與運動教練，獨立開發免輸入、全自動的「AI 文案無限生成引擎」，解決日常營運繁忙、無暇顧及社群引流的痛點。
+      </p>
+      <div class="service-points">
+        <div class="point">全自動隨機矩陣：預內建數百種濕氣、減脂、解壓隨機燃料，點擊即隨機洗牌。</div>
+        <div class="point">自帶變現鉤子：文案末端精密嵌入私訊代碼，將社群瀏覽量轉化為真實體驗客群。</div>
+        <div class="point">零門檻操作介面：手機網頁即可直接操作，一鍵複製，秒級搞定全年度社群排班。</div>
+      </div>
+    </div>
+    <div class="visual" data-icon="🎯">
+      <div class="visual-label">
+        <strong>用科技釋放雙手。</strong>
+        <span>教練與店長只需專注最核心的技術服務，社群行銷完全交給自動化矩陣。</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="reserve">
+  <h2>親身體驗，<br>U-Life 身體重啟系統。</h2>
+  <p>
+    不要再讓疲勞支配你的生活。從一場科學評估開始，徹底找回你身體原本的輕盈狀態。
+  </p>
+  <a href="https://lin.ee/wrNysV3" class="button">
+    立即預約體驗
+  </a>
+</section>
+
+<footer class="footer">
+  U-Life Health & Technology System © 2026
+</footer>
+
+</body>
+</html>
