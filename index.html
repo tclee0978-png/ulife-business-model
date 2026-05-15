@@ -3,434 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>U-Life｜健康事業系統｜AI 驅動實體翻倍</title>
+<title>U-Life AI 貼文生成器 - 永久版</title>
 <style>
 :root{
-  --bg: #ffffff;
-  --card-bg: #f5f5f7;
-  --text: #1d1d1f;
-  --muted: #86868b;
-  --line: rgba(0, 0, 0, 0.08);
-  --gold: #b69146;
+  --bg: #ffffff; 
+  --card: #f5f5f7; 
+  --text: #1d1d1f; 
+  --muted: #86868b; 
   --blue: #0066cc;
+  --line: rgba(0, 0, 0, 0.08);
 }
-
-*{
-  box-sizing: border-box;
-}
-
-html{
-  scroll-behavior: smooth;
-}
-
 body{
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Noto Sans TC", Arial, sans-serif;
-  line-height: 1.65;
-  color: var(--text);
-  background: var(--bg);
-  -webkit-font-smoothing: antialiased;
-  letter-spacing: -0.022em;
+  margin:0; background:#ffffff; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Noto Sans TC", sans-serif;
+  padding:20px; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  letter-spacing: -0.022em; -webkit-font-smoothing: antialiased;
 }
-
-/* Apple 純白毛玻璃導覽列 */
-.nav{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 48px;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid var(--line);
-}
-
-.nav-inner{
-  width: min(1024px, calc(100% - 32px));
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.5px;
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links a{
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 12px;
-  margin-left: 24px;
-  transition: color 0.2s;
-  font-weight: 400;
-}
-
-.nav-links a:hover {
-  color: var(--text);
-}
-
-.nav-links a.nav-cta {
-  background: #0071e3;
-  color: #fff;
-  padding: 4px 11px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 400;
-}
-
-/* HERO 頂級大器開場 */
-.hero{
-  min-height: 100vh;
-  background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.container{
+  background:#fff; border:1px solid var(--line); border-radius:28px; 
+  padding:40px; max-width:500px; width:100%; box-shadow:0 10px 40px rgba(0,0,0,0.02);
   text-align: center;
-  padding: 160px 20px 100px;
-  position: relative;
 }
-
-.hero::after{
-  content: "🌿";
-  position: absolute;
-  font-size: clamp(200px, 30vw, 420px);
-  opacity: 0.03;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+h1{ font-size:24px; font-weight:700; margin:0 0 8px; color: var(--text); }
+.subtitle{ color:var(--muted); font-size:13px; margin-bottom:32px; font-weight: 400; }
+.role-selector{ display:flex; background:var(--card); border-radius:999px; padding:4px; margin-bottom:32px; border: 1px solid rgba(0,0,0,0.02); }
+.role-btn{ flex:1; padding:12px; border:none; background:transparent; font-weight:600; border-radius:999px; cursor:pointer; transition:0.2s; color: var(--muted); font-size: 14px; }
+.role-btn.active{ background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.06); color:var(--text); }
+.btn-generate{
+  width:100%; padding:16px; background:#1d1d1f; color:white; border:none; border-radius:999px;
+  font-size:16px; font-weight:500; cursor:pointer; margin-bottom:20px; transition: background 0.2s;
 }
-
-.hero-inner {
-  width: min(850px, 100%);
-  z-index: 2;
-  animation: appleFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+.btn-generate:hover{ background: var(--blue); }
+.btn-generate:disabled{ background:#aaa; cursor:wait; }
+.output-box{
+  background:var(--card); padding:24px; border-radius:18px; min-height:180px; text-align:left;
+  white-space:pre-wrap; line-height:1.65; font-size:15px; display:none; border:1px solid rgba(0,0,0,0.02); color: var(--text);
 }
-
-.eyebrow{
-  color: var(--gold);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-h1{
-  font-size: clamp(40px, 7.5vw, 76px);
-  line-height: 1.1;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  margin: 0 0 28px;
-  color: var(--text);
-}
-
-.hero p{
-  font-size: clamp(18px, 2vw, 22px);
-  max-width: 680px;
-  margin: 0 auto 48px;
-  color: #444;
-  line-height: 1.5;
-}
-
-.button{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  padding: 0 40px;
-  background: #1d1d1f;
-  color: white;
-  font-size: 17px;
-  font-weight: 600;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 8px 30px rgba(29,29,31,0.12);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.button:hover{
-  background: var(--blue);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(0,102,204,0.25);
-}
-
-.section-title{
-  text-align: center;
-  padding: 100px 20px 48px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.section-title h2{
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin: 0 0 12px 0;
-}
-
-.section-title p {
-  color: var(--muted);
-  font-size: 18px;
-  margin: 0;
-}
-
-/* 經典 Apple 呼吸感卡片網格 */
-.card-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 28px;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.pain-card {
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: 24px;
-  border: 1px solid rgba(0,0,0,0.01);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  text-align: left;
-}
-
-.pain-card:hover {
-  transform: translateY(-4px);
-  background: #ffffff;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-  border-color: var(--line);
-}
-
-.pain-card h3 {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 16px 0;
-  color: var(--text);
-}
-
-.pain-card p {
-  color: var(--muted);
-  font-size: 16px;
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* 商業模式畫布大網格 (Business Model Canvas) */
-.canvas-container {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto 60px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: minmax(180px, auto);
-  gap: 16px;
-}
-
-.canvas-cell {
-  background: var(--card-bg);
-  border-radius: 20px;
-  padding: 24px;
-  border: 1px solid rgba(0,0,0,0.01);
-  transition: transform 0.2s;
-}
-.canvas-cell:hover { transform: scale(1.01); }
-.canvas-cell h4 { margin: 0 0 10px 0; font-size: 15px; font-weight: 600; color: var(--text); }
-.canvas-cell p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
-
-/* 畫布網格特殊定位 */
-.kp { grid-column: 1; grid-row: 1 / 3; }
-.ka { grid-column: 2; grid-row: 1; }
-.kr { grid-column: 2; grid-row: 2; }
-.vp { grid-column: 3; grid-row: 1 / 3; background: #fff; border: 2px solid #1d1d1f; }
-.cr { grid-column: 4; grid-row: 1; }
-.ch { grid-column: 4; grid-row: 2; }
-.cs { grid-column: 5; grid-row: 1 / 3; }
-.c-cost { grid-column: 1 / 3; grid-row: 3; }
-.c-rev { grid-column: 3 / 6; grid-row: 3; }
-
-/* 三大核心技術卡片 */
-.tech-card {
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: 24px;
-  text-align: left;
-  border: 1px solid rgba(0,0,0,0.01);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.tech-card:hover {
-  transform: translateY(-4px);
-  background: #ffffff;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-  border-color: var(--line);
-}
-
-.tech-card h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin: 0 0 14px 0;
-  color: var(--text);
-}
-
-.tech-card p {
-  color: var(--muted);
-  font-size: 15px;
-  margin: 0;
-  line-height: 1.6;
-}
-
-@keyframes appleFadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media(max-width:900px){
-  .canvas-container { grid-template-columns: 1fr; }
-  .kp, .ka, .kr, .vp, .cr, .ch, .cs, .c-cost, .c-rev { grid-column: auto; grid-row: auto; }
-  .card-grid { grid-template-columns: 1fr; }
-  .nav-links a { display: none; }
-}
+.btn-copy{ margin-top:16px; color:var(--blue); background:none; border:none; font-size:14px; cursor:pointer; font-weight: 500; width: 100%; text-align: center; display: none; }
+.btn-copy:hover{ text-decoration: underline; }
 </style>
 </head>
 <body>
+<div class="container">
+  <h1>U-Life AI 貼文生成器</h1>
+  <p class="subtitle">永久版使用者 • 今日已使用 <span id="count">0</span>/100</p>
 
-<!-- Apple 經典純白導覽列 -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="#" class="logo">U-Life SYSTEM</a>
-    <div class="nav-links">
-      <a href="#pain">經營痛點</a>
-      <a href="#canvas">商業模式畫布</a>
-      <a href="#features">三大技術板塊</a>
-      <a href="https://tclee0978-png.github.io/ulife-system/" class="nav-cta" style="color: #fff;">打開 AI 印鈔機</a>
-    </div>
+  <div class="role-selector">
+    <button class="role-btn active" id="btn-coach" onclick="setRole('coach')">🏋️ 運動教練</button>
+    <button class="role-btn" id="btn-shop" onclick="setRole('shop')">💈 蒸足店長</button>
   </div>
-</nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">U-Life Health Business System</div>
-    <h1>讓實體店面<br>用 AI 自動化獲客<br>用系統實現複利成長</h1>
-    <p>專為運動教練、蒸足店長、美體工作室設計<br>一鍵生成爆款文案 + 低勞力高坪效健康服務 + 訂閱制會員系統</p>
+  <button class="btn-generate" id="mainBtn" onclick="generatePost()">🎯 一鍵生成今日爆款文案</button>
+
+  <div class="output-box" id="outputBox"></div>
+  <button class="btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 複製今日爆款文案</button>
+</div>
+
+<script>
+// ==================== 創辦人配置 ====================
+// 請將你申請到的真實 Google Gemini API Key 填入下方雙引號中
+const GEMINI_KEY = "YOUR_GEMINI_API_KEY_HERE";   
+
+let currentRole = 'coach';
+let todayUsed = 0;   
+
+function setRole(role) {
+  currentRole = role;
+  document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(role === 'coach' ? 'btn-coach' : 'btn-shop').classList.add('active');
+  document.getElementById('outputBox').style.display = "none";
+  document.getElementById('copyBtn').style.display = "none";
+}
+
+async function generatePost() {
+  if (todayUsed >= 100) {
+    alert("今日生成次數已達上限（100則），明日重置。");
+    return;
+  }
+  if (GEMINI_KEY.includes("YOUR_GEMINI")) {
+    alert("系統提示：請創辦人煥然先將代碼中的 GEMINI_KEY 替換為真實的 Gemini API Key 才能啟動雲端大腦！");
+    return;
+  }
+
+  const btn = document.getElementById('mainBtn');
+  const output = document.getElementById('outputBox');
+  const copyBtn = document.getElementById('copyBtn');
+
+  btn.disabled = true;
+  btn.innerText = "⚡ U-Life AI 正在現場撰寫中...";
+  output.style.display = "block";
+  output.innerText = "正在連線 U-Life 數位大腦，針對目前市場痛點進行即時文案編寫...";
+
+  // 100% 完整焊死的頂級台灣在地引流 Prompt 燃料
+  let prompt = "";
+  if (currentRole === 'coach') {
+    prompt = "你現在是 U-Life 系統的頂級明星運動教練。請現場撰寫一篇全新、完全不重複的社群招生引流文案。內容要針對久坐上班族、少吃節食身材走樣者，精準切入蹦蹦跳床、TRX 懸吊或階梯有氧的其中一項課程（隨機選一個重點寫即可，不要全部擠在一起），主打高多巴胺解壓與快樂燃脂。結尾必須帶有強烈的變現行動呼籲（CTA），例如引導私訊扣關鍵字【我要變緊實】領取免費體驗券。文字口吻要像台灣真實教練在社群發文的熱血風格，拒絕官方垃圾官話，不要有過多表情符號，直接給我文案成果，不需要任何前言或解釋。";
+  } else {
+    prompt = "你現在是 U-Life 系統的專業健康管理蒸足店長。請現場撰寫一篇全新、完全不重複的店鋪引流文案。內容要切中現代人冷氣房待久了體內濕氣重、手腳冰冷、失眠或慢性疲勞的日常痛點，深度包裝 U-Life 獨家的『1對1骨架數據評估』以及『遠紅外線負離子草本蒸足與熱導筋膜舒緩技術』。文案要具備極強的體感共鳴與職人信任感。結尾必須包含引流鉤子，例如限時釋出本週末3個名額、引導私訊扣【我想預約】體驗。直接給我文案內容，不要有任何多餘的客套解釋。";
+  }
+
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    });
+
+    const data = await res.json();
+    const text = data.candidates[0].content.parts[0].text;
+
+    output.innerText = text;
+    copyBtn.style.display = "block";
+    todayUsed++;
+    document.getElementById('count').innerText = todayUsed;
     
-    <a href="https://lin.ee/wrNysV3" class="button">🔥 立即預約 1對1 系統導入諮詢（前20名免費）</a>
-    
-    <p style="margin-top:48px; font-size:16px; color:var(--muted); font-weight: 500;">
-      已經幫助超過 12 家實體店家<br>
-      平均每月新增 8~15 位高回購客戶
-    </p>
-  </div>
-</section>
+    // 絲滑滾動到文案成果區
+    output.scrollIntoView({ behavior: 'smooth' });
+  } catch(e) {
+    output.innerText = "大腦連線發生未預期狀況，請稍後再試或聯絡 U-Life 系統技術團隊。";
+  } finally {
+    btn.disabled = false;
+    btn.innerText = "🎯 一鍵生成今日爆款文案";
+  }
+}
 
-<!-- 痛點區 -->
-<div class="section-title" id="pain">
-  <h2>你是否也卡在這些困境？</h2>
-</div>
-<div class="card-grid">
-  <div class="pain-card">
-    <h3>每天發文好累</h3>
-    <p>下班大腦放空，卻還要絞盡腦汁想文案、拍圖、發貼？手速趕不上算法變化？</p>
-  </div>
-  <div class="pain-card">
-    <h3>勞力做到手酸</h3>
-    <p>坪效低、手技重、客戶來了又走。無法擺脫「做一個賺一個」的雙手勞動詛咒？</p>
-  </div>
-  <div class="pain-card">
-    <h3>害怕被時代淘汰</h3>
-    <p>不會操作 AI、不懂數位引流。看著對手用新工具收割名單，自己只能在原地乾著急？</p>
-  </div>
-</div>
-
-<!-- 商業模式畫布 -->
-<div class="section-title" id="canvas">
-  <h2>完整商業模式畫布</h2>
-  <p style="max-width:720px;margin:0 auto 20px;font-size:18px;color:var(--muted);">一張圖看懂 U-Life 如何把實體空間、科技引流、複利會員三者結合</p>
-</div>
-
-<div class="canvas-container">
-  <div class="canvas-cell kp">
-    <h4>🤝 關鍵夥伴 (Key Partners)</h4>
-    <p>• 實體空間創業者 (蒸足店、美體工作室)<br>• 專業運動教練 (跳床/TRX/有氧)<br>• U-Life 數位研發團隊<br>• 世界級草本營養供應鏈</p>
-  </div>
-  <div class="canvas-cell ka">
-    <h4>⚡ 關鍵活動 (Key Activities)</h4>
-    <p>• 1對1 精準骨架數據評估<br>• 線下高體感循環放鬆與動態燃脂服務<br>• AI 矩陣行銷工具維護與代碼升級</p>
-  </div>
-  <div class="canvas-cell kr">
-    <h4>🛠️ 關鍵資源 (Key Resources)</h4>
-    <p>• 獨家免輸入隨機矩陣文案引擎<br>• 複合式健康重啟實體空間技術<br>• 高留存率的系統化培訓課程</p>
-  </div>
-  <div class="canvas-cell vp">
-    <h4>🎯 價值主張 (Value Proposition)</h4>
-    <p>• <b>對店家：</b>降低勞力依存，活化空間坪效，一鍵自動化獲取客源。<br>• <b>對消費者：</b>結合評估、物理修復、快樂動能與精準營養的閉環重啟體驗。</p>
-  </div>
-  <div class="canvas-cell cr">
-    <h4>❤️ 客戶關係 (Customer Relationships)</h4>
-    <p>• 訂閱制健康會員深度綁定<br>• 1對1 技術指導與持續性售後追蹤<br>• 內部夥伴專屬的 AI 科技工具永久赋能</p>
-  </div>
-  <div class="canvas-cell ch">
-    <h4>📢 通路渠道 (Channels)</h4>
-    <p>• 實體加盟/技術授權空間<br>• 社群媒體矩陣 (Threads/FB/IG 裂變)<br>• 口碑轉介紹與體驗券裂變引流</p>
-  </div>
-  <div class="canvas-cell cs">
-    <h4>👥 客群細分 (Customer Segments)</h4>
-    <p>• 肩頸僵硬、久坐高壓的辦公室族群<br>• 遭遇營收瓶頸、渴望轉型的實體店長<br>• 下班體力耗盡、無法持續行銷的運動教練</p>
-  </div>
-  <div class="canvas-cell c-cost">
-    <h4>💰 成本結構 (Cost Structure)</h4>
-    <p>• 實體空間營運與設備建置成本 <br>• AI 系統與網頁前端維護費用 <br>• 夥伴技術教育培訓與行銷推廣支出</p>
-  </div>
-  <div class="canvas-cell c-rev">
-    <h4>📈 獲利模式 (Revenue Streams)</h4>
-    <p>• 線下實體客時費與技術服務收入 <br>• 訂閱制健康會員複利營收 <br>• 系統加盟、技術授權與 AI 數位工具經銷管道被動收入</p>
-  </div>
-</div>
-
-<!-- 核心功能 -->
-<div class="section-title" id="features">
-  <h2>三大核心技術板塊</h2>
-</div>
-<div class="card-grid" style="max-width:1180px;">
-  <div class="tech-card">
-    <h3>🌿 靜態熱導循環修復</h3>
-    <p>低勞力草本蒸足 + 筋膜熱導 + 骨架評估<br>不需要耗費高強度體力，讓店面坪效與人效同時翻倍成長。</p>
-  </div>
-  <div class="tech-card">
-    <h3>🏃 高多巴胺動態燃脂</h3>
-    <p>蹦跳床、TRX 懸吊、階梯有氧<br>打破健身的枯燥與痛苦，把運動變成客戶主動上門的快樂派對。</p>
-  </div>
-  <div class="tech-card">
-    <h3>🎯 AI 矩陣自動引流</h3>
-    <p>零打字門檻、一鍵隨機生成今日爆款文案<br>自帶變現引流鉤子，自動把精準流量導入私域與實體店鋪。</p>
-  </div>
-</div>
-
-<!-- 最後強力 CTA -->
-<section style="text-align:center;padding:140px 20px;background:linear-gradient(#1d1d1f,#0f0f11);color:white;margin-top:100px;">
-  <h2 style="font-size:44px;line-height:1.15;max-width:720px;margin:0 auto; font-weight: 700; letter-spacing: -0.02em;">停止用時間換金錢<br>開始用系統創造複利</h2>
-  <p style="font-size:20px;max-width:560px;margin:32px auto 48px; color: #a1a1a6;">U-Life 把你從勞力密集，帶向高坪效、高回購的健康事業新格局。</p>
-  <a href="https://lin.ee/wrNysV3" class="button" style="background:#c9a66b;color:#000;height:64px;font-size:18px;">立即預約系統導入諮詢</a>
-  <p style="margin-top:40px;font-size:14px;color: #86868b;">限時前20名免費商業診斷 + AI工具完整教學</p>
-</section>
-
-<footer style="text-align:center;padding:60px 20px;font-size:13px;color:#888;background:#fff;border-top:1px solid #eee;">
-  U-Life Health & Business System © 2026<br>
-  科技賦能實體・系統驅動複利
-</footer>
-
+function copyToClipboard() {
+  const text = document.getElementById('outputBox').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert("✅ 文案已成功複製到剪貼簿！快去發文成交吧 🚀");
+  });
+}
+</script>
 </body>
 </html>
