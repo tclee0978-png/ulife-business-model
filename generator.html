@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-Life AI 貼文生成器 • 永久版</title>
+<style>
+:root{
+  --bg: #ffffff;
+  --card: #f5f5f7;
+  --text: #1d1d1f;
+  --muted: #86868b;
+  --blue: #0071e3;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans TC", sans-serif;
+  background: #f8f8f8;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.container {
+  background: white;
+  max-width: 560px;
+  width: 100%;
+  border-radius: 32px;
+  box-shadow: 0 20px 70px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.header {
+  background: linear-gradient(135deg, #1d1d1f, #2c2c2e);
+  color: white;
+  padding: 40px 24px;
+  text-align: center;
+}
+.header h1 { font-size: 28px; font-weight: 700; margin: 0 0 8px; }
+.header p { font-size: 15px; opacity: 0.9; }
+
+.main { padding: 40px 28px; }
+.role-selector {
+  display: flex;
+  background: var(--card);
+  border-radius: 999px;
+  padding: 6px;
+  margin-bottom: 40px;
+}
+.role-btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.role-btn.active {
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-generate {
+  width: 100%;
+  padding: 18px;
+  background: #1d1d1f;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.output-box {
+  margin-top: 32px;
+  background: var(--card);
+  padding: 28px;
+  border-radius: 24px;
+  min-height: 260px;
+  line-height: 1.7;
+  display: none;
+}
+.copy-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  color: var(--blue);
+  border: 1.5px solid var(--blue);
+  border-radius: 999px;
+  cursor: pointer;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>U-Life AI 貼文生成器</h1>
+    <p>永久版使用者 • 今日已使用 <span id="count">0</span>/150</p>
+  </div>
+
+  <div class="main">
+    <div class="role-selector">
+      <button class="role-btn active" onclick="setRole('coach')">🏋️ 運動教練</button>
+      <button class="role-btn" onclick="setRole('shop')">💈 蒸足店長</button>
+    </div>
+
+    <button class="btn-generate" onclick="generatePost()">🎯 一鍵生成今日爆款文案</button>
+
+    <div class="output-box" id="output"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 一鍵複製文案</button>
+  </div>
+</div>
+
+<script>
+// 這裡先用 placeholder，之後接 Proxy 或 API
+let currentRole = 'coach';
+let used = 0;
+
+function setRole(role) {
+  currentRole = role;
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+async function generatePost() {
+  // 這裡之後接你的後端 Proxy
+  const output = document.getElementById('output');
+  const copyBtn = document.getElementById('copyBtn');
+  
+  output.style.display = "block";
+  output.innerHTML = "AI 正在生成高轉換社群文案...";
+  
+  // Demo 效果（之後換真實 API）
+  setTimeout(() => {
+    output.innerHTML = `🔥 姐妹們，肩膀酸到抬不起手了嗎？<br><br>
+每天久坐滑手機，濕氣全卡在肩頸...<br>
+來一堂 45 分鐘草本蒸足 + 筋膜熱導，當場就感覺身體輕鬆很多！<br><br>
+現在私訊「肩頸」領取限量體驗券，本週僅剩 5 名！<br><br>
+#蒸足 #肩頸放鬆 #去濕氣 #健康管理`;
+    copyBtn.style.display = "block";
+    used++;
+    document.getElementById('count').innerText = used;
+  }, 1200);
+}
+
+function copyToClipboard() {
+  const text = document.getElementById('output').innerText;
+  navigator.clipboard.writeText(text).then(() => alert("✅ 文案已複製！可以直接發到 IG / FB / Threads"));
+}
+</script>
+</body>
+</html>
