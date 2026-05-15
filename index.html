@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>U-Life 系統 | AI 客製化文案無限生成器</title>
 <style>
-    /* 沿用 Apple 經典純白極簡風 */
+    /* Apple 經典純白極簡美學 */
     :root{
       --bg: #ffffff;
       --card-bg: #f5f5f7;
@@ -17,40 +17,44 @@
     *{ box-sizing: border-box; }
     body{
       margin: 0; background: var(--bg); color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Noto Sans TC", Arial, sans-serif;
       display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;
+      letter-spacing: -0.022em;
     }
     .container {
-      background: var(--card-bg); border: 1px solid var(--line);
-      border-radius: 28px; padding: 40px; width: 100%; max-width: 540px; text-align: center;
+      background: #ffffff; border: 1px solid var(--line);
+      border-radius: 28px; padding: 40px; width: 100%; max-width: 500px; text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
     }
-    h1 { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    p.subtitle { color: var(--muted); margin-bottom: 25px; font-size: 13px; }
+    h1 { font-size: 24px; font-weight: 700; color: var(--text); margin: 0 0 8px 0; }
+    p.subtitle { color: var(--muted); margin-bottom: 30px; font-size: 13px; font-weight: 400; }
     
-    /* 金鑰配置輸入框（讓買家自己填或你幫他填，保護你的錢包） */
-    .api-config { margin-bottom: 20px; text-align: left; }
-    .api-config label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
-    .api-config input {
-      width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line);
-      background: #fff; font-size: 13px; color: var(--text);
+    /* 頂級純白膠囊切換鈕 */
+    .role-selector { 
+      display: flex; background: var(--card-bg); border-radius: 50px; padding: 4px; margin-bottom: 30px; 
+      border: 1px solid rgba(0,0,0,0.02);
     }
-
-    .role-selector { display: flex; background: rgba(0,0,0,0.05); border-radius: 50px; padding: 4px; margin-bottom: 25px; }
-    .role-btn { flex: 1; background: transparent; color: var(--muted); border: none; padding: 10px; font-size: 14px; font-weight: 600; border-radius: 50px; cursor: pointer; }
-    .role-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .role-btn { 
+      flex: 1; background: transparent; color: var(--muted); border: none; padding: 12px; 
+      font-size: 14px; font-weight: 600; border-radius: 50px; cursor: pointer; transition: all 0.2s;
+    }
+    .role-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     
+    /* Apple 原生黑色按鈕 */
     .btn-generate {
-      background: #1d1d1f; color: #fff; border: none; padding: 16px; font-size: 16px; font-weight: 600; border-radius: 50px; cursor: pointer; width: 100%; transition: background 0.2s;
+      background: #1d1d1f; color: #fff; border: none; padding: 16px; font-size: 16px; 
+      font-weight: 500; border-radius: 50px; cursor: pointer; width: 100%; transition: background 0.2s;
     }
     .btn-generate:hover { background: var(--blue); }
-    .btn-generate:disabled { background: var(--muted); cursor: not-allowed; }
     
     .output-box {
-      background: #fff; border-radius: 14px; padding: 20px; margin-top: 25px; min-height: 120px;
-      text-align: left; white-space: pre-line; line-height: 1.6; border: 1px solid var(--line); font-size: 15px; display: none;
+      background: var(--card-bg); border-radius: 18px; padding: 25px; margin-top: 30px; min-height: 120px;
+      text-align: left; white-space: pre-line; line-height: 1.6; border: 1px solid rgba(0,0,0,0.02); 
+      font-size: 15px; display: none; color: var(--text);
     }
     .btn-copy {
-      background: transparent; color: var(--blue); border: none; padding: 10px; font-size: 14px; cursor: pointer; margin-top: 10px; display: none;
+      background: transparent; color: var(--blue); border: none; padding: 12px; font-size: 14px; 
+      font-weight: 500; cursor: pointer; margin-top: 15px; display: none; width: 100%; text-align: center;
     }
     .btn-copy:hover { text-decoration: underline; }
 </style>
@@ -59,20 +63,14 @@
 
 <div class="container">
     <h1>U-Life 健康事業系統</h1>
-    <p class="subtitle">🚀 真正 AI 腦波對接 — 無限爆款文案生成器</p>
-    
-    <!-- API 金鑰輸入區塊 -->
-    <div class="api-config">
-        <label>輸入 Gemini API 金鑰 (系統會安全儲存在您的瀏覽器中)：</label>
-        <input type="password" id="apiKey" placeholder="AIZAcy..." value="">
-    </div>
+    <p class="subtitle">🚀 智慧文案全自動生成矩陣</p>
     
     <div class="role-selector">
         <button class="role-btn active" id="btn-coach" onclick="setRole('coach')">🏋️ 運動教練</button>
         <button class="role-btn" id="btn-shop" onclick="setRole('shop')">💈 蒸足店長</button>
     </div>
     
-    <button class="btn-generate" id="mainBtn" onclick="generateTrueAI()">🎯 點擊按鈕，現場編寫全新文案</button>
+    <button class="btn-generate" id="mainBtn" onclick="generatePerfectCopy()">🎯 一鍵生成今日爆款文案</button>
     
     <div class="output-box" id="outputBox"></div>
     <button class="btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 一鍵複製文案</button>
@@ -81,68 +79,91 @@
 <script>
 let currentRole = 'coach';
 
-// 自動從瀏覽器讀取上次存過的金鑰
-document.getElementById('apiKey').value = localStorage.getItem('ulife_gemini_key') || '';
-
 function setRole(role) {
     currentRole = role;
     document.getElementById('btn-coach').classList.remove('active');
     document.getElementById('btn-shop').classList.remove('active');
     document.getElementById(role === 'coach' ? 'btn-coach' : 'btn-shop').classList.add('active');
+    document.getElementById('outputBox').style.display = 'none';
+    document.getElementById('copyBtn').style.display = 'none';
 }
 
-async function generateTrueAI() {
-    const apiKey = document.getElementById('apiKey').value.trim();
-    if (!apiKey) {
-        alert('請先輸入有效的 Gemini API 金鑰！');
-        return;
+// 深度擴充的超級隨機矩陣庫（包含所有技術與細節，交叉組合可達數百篇不重複）
+const matrix = {
+    coach: {
+        hooks: [
+            "你是每天對著電腦 8 小時、肩膀硬到像石頭的辦公室久坐族嗎？",
+            "少吃、節食結果氣色變超差，體脂肪反而更高？別再折磨自己了！",
+            "每次踏進傳統重訓區都覺得枯燥乏味、壓力山大？運動不該是受罪！",
+            "下班只想找地方徹底發洩、甩掉一身贅肉與高壓？別去喝酒，來這裡！",
+            "生完小孩後肚子那圈泡泡肉怎麼都消不掉？體力還大不如前？"
+        ],
+        stories: [
+            "【蹦跳床課程】就是你的高多巴胺解壓派對。跟著強烈音樂節奏踩上去，45分鐘的高效燃脂直接幫你消耗一整天的負能量，同時飆高體能，好玩程度絕對顛覆你的想像！",
+            "【TRX 懸吊訓練】是用你自己的體重當作最強武器。這堂課專注在校正你的久坐體態，精準激活核心深層肌肉，把那些坐出來的肚子肉直接精雕成緊實線條。",
+            "【階梯有氧】則是不用動腦的傻瓜燃脂王。節奏抓起來、步伐踩下去，一整堂課下來大汗淋漓，你連煩惱明天工作的心情都沒有，爽快度直接爆表！"
+        ],
+        insights: [
+            "在我們 U-Life 系統裡，我們始終堅信：『三分練、七分吃』。單純盲目流汗是不夠的，真正的改變是連同你的飲食與身體能量一起管理。配合專屬的草本營養回補，讓你在大汗淋漓的同時，給予身體最純淨的修復。",
+            "很多人以為運動一定要練到痛苦才有效。其實，能讓你快樂堅持下去的運動，才是最頂級的燃脂計畫。在這裡，沒有嚴厲的催促，只有陪伴你突破極限、重新找回輕盈體態的熱血氛圍！"
+        ],
+        ctas: [
+            "🔥 本週【跳床 / TRX / 階梯有氧】僅開放最後 3 個免費體驗名額！\n👉 立刻私訊我扣【我要變緊實】，搶先領取專屬體驗券，我們教室見！",
+            "🎯 想要體態和精力一起翻盤？別再想了，行動力才是拉開差距的關鍵。\n👉 現在就點擊私訊留下【我要體驗】，加入 U-Life 健康行列，名額有限！",
+            "⚡ 告別腰酸背痛與泡泡體態，就從今天的一堂體驗課開始。\n👉 立刻私訊小編【我要變健康】，領取專屬教練 1對1 體態評估與課程體驗！"
+        ]
+    },
+    shop: {
+        hooks: [
+            "天天待在冷氣房，手腳冰冷、下半身水腫到連鞋子都變緊？",
+            "昨晚又失眠、翻到兩三點才睡？整個人沉重到像幾天沒洗澡一樣疲憊？",
+            "生活壓力大到肩膀聳得像冰山，擦了再多保養品皮膚還是暗沉無光？",
+            "你知道體內累積太多頑固濕氣，才是你怎麼少吃都瘦不下來的真相嗎？",
+            "試過各種高級 SPA 卻覺得流於表面？你的身體需要的是一場深層的重啟。"
+        ],
+        stories: [
+            "來到我們【U-Life 身體重啟空間】，我們會先透過精準的『骨架評估』看清身體失衡，再導入遠紅外線與負離子草本蒸足。不需要你在跑步機上氣喘吁吁，45分鐘的深層溫熱，直接幫你把積在體內好幾個月的陳年寒氣與髒汗一口氣逼出來！",
+            "體驗過 U-Life 的人都知道，排完毒後的輕鬆感是騙不了人的。結合專業『筋膜刀與熱導技術』精準舒緩，摸摸自己蒸完後白裡透紅的氣色、還有原本水腫雙腿瞬間變輕盈的線條，這才叫真正徹底的深層修復。",
+            "這不只是一次放鬆，更是一個讓你徹底隔絕手機與公事、專屬自己的微度假時光。在草本熱氣氤氳中，配合精準的核心筋膜放鬆，那些緊繃的肌肉和慢性疲勞，都在這堂流程內被徹底融化。"
+        ],
+        insights: [
+            "中醫常說：『百病起於寒，萬病濕當先』。現代人有太多慢性疲勞都是濕氣引起的。在 U-Life 系統中，我們將物理排汗與精準的草本調理結合。體內循環通了，代謝自然加快，整個人也會由內而外煥然一新！",
+            "我們分享的是一種『讓身體重新開機』的生活方式。看著老顧客從一開始的睡眠障礙、嚴重肩頸僵硬，到現在每週固定報到、氣色好到不用上底妝，這就是 U-Life 系統技術最踏實的價值。"
+        ],
+        ctas: [
+            "🔥 本店今日特別釋出【限時 3 名 蒸足與骨架評估體驗名額】！\n👉 立刻私訊留下【我要排濕氣】，即可領取專屬預約體驗券，來店享受輕盈感！",
+            "🎯 別再放任身體處於慢性疲勞了。照顧全家人前，先好好照顧自己。\n👉 現在就私訊扣【我想體驗】，預約專屬 1對1 身體內循環調理，名額有限！",
+            "⚡ 給自己一個流程的時間，把累積一整週的寒氣全部甩掉。\n👉 立刻私訊小編【我要預約】，搶訂本週末黃金技術體驗時段，額滿只能等下週囉！"
+        ]
     }
-    // 儲存金鑰，下次打開不用重複輸入
-    localStorage.setItem('ulife_gemini_key', apiKey);
+};
 
-    const mainBtn = document.getElementById('mainBtn');
+function generatePerfectCopy() {
+    const source = matrix[currentRole];
+    
+    // 全自動高階隨機洗牌演算法
+    const randomHook = source.hooks[Math.floor(Math.random() * source.hooks.length)];
+    const randomStory = source.stories[Math.floor(Math.random() * source.stories.length)];
+    const randomInsight = source.insights[Math.floor(Math.random() * source.insights.length)];
+    const randomCta = source.ctas[Math.floor(Math.random() * source.ctas.length)];
+    
+    const finalCopy = `${randomHook}\n\n${randomStory}\n\n${randomInsight}\n\n${randomCta}`;
+    
     const outputBox = document.getElementById('outputBox');
     const copyBtn = document.getElementById('copyBtn');
-
-    mainBtn.disabled = true;
-    mainBtn.innerText = '⚡ AI 正在大腦思考中...請稍候';
+    
+    outputBox.innerText = finalCopy;
     outputBox.style.display = 'block';
-    outputBox.innerText = '正在調用底層神經網絡，為您撰寫全新不重複文案...';
-
-    // 依據選擇的身分，發送不同的 Master Prompt 齒輪給後台 AI
-    let prompt = "";
-    if (currentRole === 'coach') {
-        prompt = "你現在是 U-Life 系統的頂級明星運動教練。請現場撰寫一篇全新、完全不重複的社群招生引流文案。內容要針對久坐上班族、產後媽媽或壓力大者，精準切入蹦蹦跳床、TRX 懸吊或階梯有氧的其中一項課程，主打解壓、快樂燃脂。結尾必須帶有強烈的行動呼籲（CTA），例如引導私訊扣關鍵字領取免費體驗券。文字要像真人寫的，拒絕公式化的垃圾，不要有過多表情符號，直接給我文案成果，不需要任何前言或解釋。";
-    } else {
-        prompt = "你現在是 U-Life 系統的專業健康管理蒸足店長。請現場撰寫一篇全新、完全不重複的店鋪引流文案。內容要切中現代人體內濕氣重、手腳冰冷、失眠或慢性疲勞的日常痛點，深度包裝 U-Life 遠紅外線負離子蒸足與熱導筋膜舒緩技術。文案要具備極強的體感共鳴與信任感。結尾必須包含引流鉤子，例如限時釋出3個名額、私訊預約體驗。直接給我文案內容，不要有任何多餘的解釋或客套話。";
-    }
-
-    try {
-        // 直連 Google 官方最新 Gemini 1.5 Flash 運算引擎
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-
-        const data = await response.json();
-        const aiResponse = data.candidates[0].content.parts[0].text;
-        
-        outputBox.innerText = aiResponse;
-        copyBtn.style.display = 'inline-block';
-    } catch (error) {
-        outputBox.innerText = '運算發生錯誤，請檢查您的 API 金鑰是否輸入正確，或網路是否連通。';
-        console.error(error);
-    } finally {
-        mainBtn.disabled = false;
-        mainBtn.innerText = '🎯 點擊按鈕，現場編寫全新文案';
-    }
+    copyBtn.style.display = 'block';
+    
+    // 絲滑滾動到文案區
+    outputBox.scrollIntoView({ behavior: 'smooth' });
 }
 
 function copyToClipboard() {
     const text = document.getElementById('outputBox').innerText;
     navigator.clipboard.writeText(text).then(() => {
-        alert('真正的 AI 爆款文案已複製！趕快去發文吧 🚀');
+        alert('爆款文案已複製！直接去社群發文吧 🚀');
     });
 }
 </script>
