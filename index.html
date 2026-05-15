@@ -1,211 +1,463 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U-Life 商業模式 | 數位變現系統</title>
-    <style>
-        /* Apple 高階暗黑美學底色 */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #000000;
-            color: #f5f5f7;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            letter-spacing: -0.022em;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-Life｜身體重啟系統</title>
 
-        /* 頂級光暈背景（打造空間深度） */
-        .glow-bg {
-            position: fixed;
-            top: -20%;
-            left: -10%;
-            width: 60vw;
-            height: 60vh;
-            background: radial-gradient(circle, rgba(0, 119, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-        .glow-bg-2 {
-            position: fixed;
-            bottom: -10%;
-            right: -10%;
-            width: 50vw;
-            height: 50vh;
-            background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
+<style>
+:root{
+  --bg:#000;
+  --text:#f5f5f7;
+  --muted:#86868b;
+  --line:rgba(255,255,255,.08);
+  --gold:#d8b56a;
+  --blue:#2997ff;
+  --green:#00ffd5;
+  --apple-gray: rgba(22, 22, 23, 0.6);
+}
 
-        /* 主視覺區（Apple 經典大膽留白） */
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 85vh;
-            text-align: center;
-            padding: 0 20px;
-        }
+*{
+  box-sizing:border-box;
+}
 
-        .system-tag {
-            background: linear-gradient(90deg, #00ffcc, #0077ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
+html{
+  scroll-behavior:smooth;
+}
 
-        h1 {
-            font-size: 56px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin: 0 0 20px 0;
-            background: linear-gradient(180deg, #ffffff 30%, #a1a1a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+body{
+  margin:0;
+  background:#000;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","Noto Sans TC",Arial,sans-serif;
+  letter-spacing:-.035em;
+  overflow-x:hidden;
+}
 
-        h1 span {
-            background: linear-gradient(90deg, #00ffcc, #0077ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* 頂級毛玻璃導覽列 */
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:52px;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
+  background:rgba(0,0,0,.75);
+  border-bottom:1px solid var(--line);
+}
 
-        .hero-desc {
-            font-size: 20px;
-            color: #86868b;
-            max-width: 600px;
-            line-height: 1.5;
-            margin-bottom: 40px;
-            font-weight: 400;
-        }
+.nav-inner{
+  width:min(1180px,calc(100% - 32px));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-        /* 蘋果工藝級按鈕（細膩漸層與微動態） */
-        .cta-btn {
-            background: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 16px 36px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 20px rgba(255,255,255,0.1);
-        }
+.logo{
+  font-size:14px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing: 1px;
+}
 
-        .cta-btn:hover {
-            transform: scale(1.03);
-            background: linear-gradient(90deg, #00ffcc, #0077ff);
-            color: #ffffff;
-            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
-        }
+.nav a{
+  color:#d2d2d7;
+  text-decoration:none;
+  font-size:13px;
+  margin-left:22px;
+  transition: color 0.3s;
+}
 
-        /* 商業模式矩陣卡片（毛玻璃 Glassmorphism） */
-        .matrix-section {
-            max-width: 1000px;
-            margin: 0 auto padding;
-            padding: 0 20px 100px 20px;
-        }
+.nav a:hover {
+  color: var(--blue);
+}
 
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
+/* 蘋果旗艦級雷射流光背景（加入細膩微動態） */
+.hero{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:140px 24px 80px;
+  background:
+    radial-gradient(circle at 50% 65%,rgba(216,181,106,.22),transparent 35%),
+    radial-gradient(circle at 15% 25%,rgba(41,151,255,.20),transparent 35%),
+    radial-gradient(circle at 85% 30%,rgba(0,255,213,.15),transparent 35%),
+    #000;
+  position: relative;
+}
 
-        .card {
-            background: rgba(22, 22, 23, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 22px;
-            padding: 35px;
-            text-align: left;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+.hero-inner{
+  width:min(1040px,100%);
+  animation: appleFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 204, 0.3);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
+.eyebrow{
+  background: linear-gradient(90deg, #a1a1a6, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 600;
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+}
 
-        .card-icon {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
+/* 金屬光澤標題 */
+h1{
+  margin:0;
+  font-size:clamp(54px,8.5vw,110px);
+  line-height:.95;
+  letter-spacing:-.06em;
+  font-weight:800;
+  color: #ffffff;
+}
 
-        .card h3 {
-            font-size: 22px;
-            font-weight: 600;
-            margin: 0 0 12px 0;
-            color: #f5f5f7;
-        }
+.hero h1 span{
+  display:block;
+  background: linear-gradient(110deg, #ffffff 10%, #f4e2b9 45%, #66d4ff 75%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
 
-        .card p {
-            font-size: 15px;
-            color: #86868b;
-            line-height: 1.6;
-            margin: 0;
-        }
+.hero p{
+  max-width:720px;
+  margin:36px auto 0;
+  color:var(--muted);
+  font-size:clamp(18px,2vw,24px);
+  line-height:1.5;
+  font-weight:400;
+}
 
-        /* 手機板適應 RWD */
-        @media (max-width: 768px) {
-            h1 { font-size: 38px; }
-            .hero-desc { font-size: 17px; }
-            .card { padding: 25px; }
-        }
-    </style>
+.cta{
+  margin-top:42px;
+  display:flex;
+  justify-content:center;
+  gap:24px;
+  flex-wrap:wrap;
+}
+
+.cta a{
+  color:var(--blue);
+  text-decoration:none;
+  font-size:20px;
+  font-weight:500;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cta a:hover{
+  color: var(--green);
+  transform: translateX(3px);
+}
+
+/* 左右交錯章節（升級為大氣排版） */
+.chapter{
+  min-height:85vh;
+  display:grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items:center;
+  gap:80px;
+  width:min(1180px,calc(100% - 40px));
+  margin:0 auto;
+  padding:120px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.chapter:nth-child(even){
+  direction:rtl;
+}
+
+.chapter:nth-child(even) .copy,
+.chapter:nth-child(even) .visual{
+  direction:ltr;
+}
+
+.kicker{
+  color:var(--gold);
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.chapter h2{
+  margin:0;
+  font-size:clamp(40px,5vw,72px);
+  line-height:1.05;
+  letter-spacing:-.05em;
+  font-weight:800;
+  background: linear-gradient(180deg, #ffffff 40%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.chapter p{
+  margin:28px 0 0;
+  color:var(--muted);
+  font-size:20px;
+  line-height:1.6;
+}
+
+.service-points{
+  margin-top:35px;
+  display:grid;
+  gap:16px;
+}
+
+.point{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  color:#d2d2d7;
+  font-size:17px;
+}
+
+.point:before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background: linear-gradient(135deg, var(--gold), var(--blue));
+}
+
+/* 工藝級毛玻璃視覺卡片 */
+.visual{
+  position:relative;
+  min-height:540px;
+  border-radius:32px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.08), transparent 35%),
+    linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visual:hover{
+  transform: scale(1.02);
+  border-color: rgba(216,181,106,0.3);
+  box-shadow: 0 50px 120px rgba(216,181,106,0.1);
+}
+
+.visual:after{
+  content:attr(data-icon);
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:160px;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+}
+
+.visual-label{
+  position:absolute;
+  left:24px;
+  bottom:24px;
+  right:24px;
+  z-index:2;
+  padding:24px;
+  border-radius:20px;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.visual-label strong{
+  display:block;
+  font-size:22px;
+  margin-bottom:6px;
+  color: #fff;
+}
+
+.visual-label span{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.5;
+}
+
+/* 預約區塊（高雅金屬光暈） */
+.reserve{
+  text-align:center;
+  padding:150px 24px;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(216,181,106,.15),transparent 40%),
+    #000;
+}
+
+.reserve h2{
+  margin:0;
+  font-size:clamp(44px,6.5vw,86px);
+  line-height:1.05;
+  letter-spacing:-.05em;
+  font-weight:800;
+  color: #fff;
+}
+
+.reserve p{
+  max-width:680px;
+  margin:32px auto 0;
+  color:var(--muted);
+  font-size:21px;
+  line-height:1.55;
+}
+
+/* 蘋果原生高質感膠囊按鈕 */
+.button{
+  margin-top:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:56px;
+  padding:0 38px;
+  border-radius:999px;
+  background:#ffffff;
+  color:#000000;
+  text-decoration:none;
+  font-weight:600;
+  font-size: 17px;
+  box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.button:hover{
+  transform: scale(1.04);
+  background: linear-gradient(135deg, var(--gold), #fff);
+  box-shadow: 0 10px 30px rgba(216,181,106,0.3);
+}
+
+.footer{
+  text-align:center;
+  color:#6e6e73;
+  padding:42px 20px;
+  font-size: 13px;
+  border-top:1px solid var(--line);
+}
+
+/* 蘋果經典動畫效果 */
+@keyframes appleFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+@media(max-width:900px){
+  .chapter,
+  .chapter:nth-child(even){
+    grid-template-columns:1fr;
+    direction:ltr;
+    gap:48px;
+    min-height:auto;
+    padding: 70px 0;
+  }
+
+  .visual{
+    min-height:380px;
+  }
+
+  .visual:after{
+    font-size:120px;
+  }
+
+  .nav a{
+    display:none;
+  }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="glow-bg"></div>
-    <div class="glow-bg-2"></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">U-Life 身體重啟系統</div>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="system-tag">U-Life Business System</div>
-        <h1>打破時間換錢的<br><span>全自動變現商業模式</span></h1>
-        <p class="hero-desc">結合實體店面、高含金量 AI 行銷工具與精準草本營養管理。不只開一家店，更是在打造一個能無上限自動運作的組織複利系統。</p>
-        <button class="cta-btn" onclick="scrollToMatrix()">探索系統核心</button>
-    </section>
+    <div>
+      <a href="#services">服務</a>
+      <a href="#reserve">預約</a>
+    </div>
+  </div>
+</nav>
 
-    <!-- 核心矩陣區塊 -->
-    <section class="matrix-section" id="matrix">
-        <div class="matrix-grid">
-            <!-- 卡片 1 -->
-            <div class="card">
-                <div class="card-icon">💈</div>
-                <h3>實體店面轉型</h3>
-                <p>針對蒸足、美體等實體空間，導入高留存體驗機制。擺脫地域與傳統勞力限制，將過路客迅速轉化為終身訂閱制會員。</p>
-            </div>
-            <!-- 卡片 2 -->
-            <div class="card">
-                <div class="card-icon">🎯</div>
-                <h3>AI 矩陣引流</h3>
-                <p>客製化免輸入「無限文案生成系統」。一鍵精準擊中現代人濕氣、燃脂、解壓痛點，讓你的社群直接變成自動獲取名單的印鈔機。</p>
-            </div>
-            <!-- 卡片 3 -->
-            <div class="card">
-                <div class="card-icon">📈</div>
-                <h3>組織複利變現</h3>
-                <p>結合三分練、七分吃的世界級營養體系。將工具作為吸引同業加盟、培訓下線的獨家贈品，實現多維度被動收入增長。</p>
-            </div>
-        </div>
-    </section>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      U-Life Health Reset System
+    </div>
 
-    <script>
-        function scrollToMatrix() {
-            document.getElementById('matrix').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+    <h1>
+      把身體放鬆。
+      <span>做成一套系統。</span>
+    </h1>
+
+    <p>
+      從骨架評估、熱導放鬆、筋膜舒緩到蒸足循環，<br>
+      U-Life 不是單次按摩，而是一套為現代高壓生活設計的身體重啟流程。
+    </p>
+
+    <div class="cta">
+      <a href="#services">查看服務項目 ›</a>
+      <a href="#reserve">立即預約 ›</a>
+    </div>
+  </div>
+</section>
+
+<main id="services">
+  <section class="chapter">
+    <div class="copy">
+      <div class="kicker">Assessment First</div>
+      <h2>骨架評估</h2>
+      <p>
+        先看清楚身體怎麼失衡，再決定怎麼放鬆。<br>
+        這是 U-Life 跟一般按摩最大的不同。
+      </p>
+
+      <div class="service-points">
+        <div class="point">姿勢與左右平衡觀察</div>
+        <div class="point">肩頸、骨盆、久坐壓力評估</div>
+        <div class="point">提供後續服務搭配建議</div>
+      </div>
+    </div>
+
+    <div class="visual" data-icon="🧍">
+      <div class="visual-label">
+        <strong>先評估，再服務。</strong>
+        <span>避免亂按、亂做，把每一次體驗變得更精準。</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="reserve" id="reserve">
+  <h2>
+    第一次來，
+    <br>
+    先做骨架評估。
+  </h2>
+
+  <p>
+    不要急著選最貴的服務。先了解你的身體狀態，再安排蒸足、熱導、舒筋或筋膜刀，這才是 U-Life 的系統邏輯。
+  </p>
+
+  <a href="https://lin.ee/wrNysV3" class="button">
+    LINE 立即預約
+  </a>
+</section>
+
+<footer class="footer">
+  U-Life Health Reset System
+</footer>
 
 </body>
 </html>
