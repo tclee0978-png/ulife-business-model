@@ -3,135 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>U-Life AI 貼文生成器 - 永久版</title>
+<title>U-Life 健康事業系統</title>
 <style>
 :root{
-  --bg: #ffffff; 
-  --card: #f5f5f7; 
-  --text: #1d1d1f; 
-  --muted: #86868b; 
-  --blue: #0066cc;
-  --line: rgba(0, 0, 0, 0.08);
+  --bg: #ffffff;
+  --card: #f5f5f7;
+  --text: #1d1d1f;
+  --muted: #86868b;
+  --gold: #b69146;
+  --blue: #0071e3;
 }
-body{
-  margin:0; background:#ffffff; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Noto Sans TC", sans-serif;
-  padding:20px; min-height:100vh; display:flex; align-items:center; justify-content:center;
-  letter-spacing: -0.022em; -webkit-font-smoothing: antialiased;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans TC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
-.container{
-  background:#fff; border:1px solid var(--line); border-radius:28px; 
-  padding:40px; max-width:500px; width:100%; box-shadow:0 10px 40px rgba(0,0,0,0.02);
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-inner {
+  width: min(1100px, 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+.logo { font-weight: 700; font-size: 17px; }
+.nav-links a {
+  margin-left: 32px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 14px;
+}
+.nav-links a:hover { color: var(--text); }
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  background: linear-gradient(135deg, #fff, #f8f7f4);
+  padding: 0 20px;
 }
-h1{ font-size:24px; font-weight:700; margin:0 0 8px; color: var(--text); }
-.subtitle{ color:var(--muted); font-size:13px; margin-bottom:32px; font-weight: 400; }
-.role-selector{ display:flex; background:var(--card); border-radius:999px; padding:4px; margin-bottom:32px; border: 1px solid rgba(0,0,0,0.02); }
-.role-btn{ flex:1; padding:12px; border:none; background:transparent; font-weight:600; border-radius:999px; cursor:pointer; transition:0.2s; color: var(--muted); font-size: 14px; }
-.role-btn.active{ background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.06); color:var(--text); }
-.btn-generate{
-  width:100%; padding:16px; background:#1d1d1f; color:white; border:none; border-radius:999px;
-  font-size:16px; font-weight:500; cursor:pointer; margin-bottom:20px; transition: background 0.2s;
+h1 {
+  font-size: clamp(48px, 7.5vw, 78px);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin: 0 0 24px;
 }
-.btn-generate:hover{ background: var(--blue); }
-.btn-generate:disabled{ background:#aaa; cursor:wait; }
-.output-box{
-  background:var(--card); padding:24px; border-radius:18px; min-height:180px; text-align:left;
-  white-space:pre-wrap; line-height:1.65; font-size:15px; display:none; border:1px solid rgba(0,0,0,0.02); color: var(--text);
+.button {
+  display: inline-block;
+  padding: 18px 48px;
+  background: #1d1d1f;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 32px;
 }
-.btn-copy{ margin-top:16px; color:var(--blue); background:none; border:none; font-size:14px; cursor:pointer; font-weight: 500; width: 100%; text-align: center; display: none; }
-.btn-copy:hover{ text-decoration: underline; }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>U-Life AI 貼文生成器</h1>
-  <p class="subtitle">永久版使用者 • 今日已使用 <span id="count">0</span>/100</p>
 
-  <div class="role-selector">
-    <button class="role-btn active" id="btn-coach" onclick="setRole('coach')">🏋️ 運動教練</button>
-    <button class="role-btn" id="btn-shop" onclick="setRole('shop')">💈 蒸足店長</button>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">U-Life SYSTEM</a>
+    <div class="nav-links">
+      <a href="index.html">首頁</a>
+      <a href="canvas.html">商業模式</a>
+      <a href="features.html">系統功能</a>
+      <a href="cases.html">真實案例</a>
+      <a href="pricing.html">購買方案</a>
+    </div>
   </div>
+</nav>
 
-  <button class="btn-generate" id="mainBtn" onclick="generatePost()">🎯 一鍵生成今日爆款文案</button>
+<section class="hero">
+  <div>
+    <h1>科技賦能實體<br>系統驅動複利成長</h1>
+    <p style="font-size:22px; max-width:720px; margin:0 auto 40px; color:#555;">
+      專為運動教練與蒸足店長設計<br>
+      AI 自動化引流 + 高坪效健康服務 + 永續訂閱系統
+    </p>
+    <a href="pricing.html" class="button">了解 3888 元永久方案 →</a>
+  </div>
+</section>
 
-  <div class="output-box" id="outputBox"></div>
-  <button class="btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 複製今日爆款文案</button>
-</div>
-
-<script>
-// ==================== 創辦人配置 ====================
-// 請將你申請到的真實 Google Gemini API Key 填入下方雙引號中
-const GEMINI_KEY = "YOUR_GEMINI_API_KEY_HERE";   
-
-let currentRole = 'coach';
-let todayUsed = 0;   
-
-function setRole(role) {
-  currentRole = role;
-  document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
-  document.getElementById(role === 'coach' ? 'btn-coach' : 'btn-shop').classList.add('active');
-  document.getElementById('outputBox').style.display = "none";
-  document.getElementById('copyBtn').style.display = "none";
-}
-
-async function generatePost() {
-  if (todayUsed >= 100) {
-    alert("今日生成次數已達上限（100則），明日重置。");
-    return;
-  }
-  if (GEMINI_KEY.includes("YOUR_GEMINI")) {
-    alert("系統提示：請創辦人煥然先將代碼中的 GEMINI_KEY 替換為真實的 Gemini API Key 才能啟動雲端大腦！");
-    return;
-  }
-
-  const btn = document.getElementById('mainBtn');
-  const output = document.getElementById('outputBox');
-  const copyBtn = document.getElementById('copyBtn');
-
-  btn.disabled = true;
-  btn.innerText = "⚡ U-Life AI 正在現場撰寫中...";
-  output.style.display = "block";
-  output.innerText = "正在連線 U-Life 數位大腦，針對目前市場痛點進行即時文案編寫...";
-
-  // 100% 完整焊死的頂級台灣在地引流 Prompt 燃料
-  let prompt = "";
-  if (currentRole === 'coach') {
-    prompt = "你現在是 U-Life 系統的頂級明星運動教練。請現場撰寫一篇全新、完全不重複的社群招生引流文案。內容要針對久坐上班族、少吃節食身材走樣者，精準切入蹦蹦跳床、TRX 懸吊或階梯有氧的其中一項課程（隨機選一個重點寫即可，不要全部擠在一起），主打高多巴胺解壓與快樂燃脂。結尾必須帶有強烈的變現行動呼籲（CTA），例如引導私訊扣關鍵字【我要變緊實】領取免費體驗券。文字口吻要像台灣真實教練在社群發文的熱血風格，拒絕官方垃圾官話，不要有過多表情符號，直接給我文案成果，不需要任何前言或解釋。";
-  } else {
-    prompt = "你現在是 U-Life 系統的專業健康管理蒸足店長。請現場撰寫一篇全新、完全不重複的店鋪引流文案。內容要切中現代人冷氣房待久了體內濕氣重、手腳冰冷、失眠或慢性疲勞的日常痛點，深度包裝 U-Life 獨家的『1對1骨架數據評估』以及『遠紅外線負離子草本蒸足與熱導筋膜舒緩技術』。文案要具備極強的體感共鳴與職人信任感。結尾必須包含引流鉤子，例如限時釋出本週末3個名額、引導私訊扣【我想預約】體驗。直接給我文案內容，不要有任何多餘的客套解釋。";
-  }
-
-  try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-    });
-
-    const data = await res.json();
-    const text = data.candidates[0].content.parts[0].text;
-
-    output.innerText = text;
-    copyBtn.style.display = "block";
-    todayUsed++;
-    document.getElementById('count').innerText = todayUsed;
-    
-    // 絲滑滾動到文案成果區
-    output.scrollIntoView({ behavior: 'smooth' });
-  } catch(e) {
-    output.innerText = "大腦連線發生未預期狀況，請稍後再試或聯絡 U-Life 系統技術團隊。";
-  } finally {
-    btn.disabled = false;
-    btn.innerText = "🎯 一鍵生成今日爆款文案";
-  }
-}
-
-function copyToClipboard() {
-  const text = document.getElementById('outputBox').innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    alert("✅ 文案已成功複製到剪貼簿！快去發文成交吧 🚀");
-  });
-}
-</script>
 </body>
 </html>
