@@ -1,167 +1,211 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U-Life｜實體店舖 AI 品牌轉型系統</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>U-Life 商業模式 | 數位變現系統</title>
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
-        
-        /* 動態進入效果 */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Apple 高階暗黑美學底色 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #000000;
+            color: #f5f5f7;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            letter-spacing: -0.022em;
+        }
 
-        /* 呼吸感 Hero */
-        .hero-zoom { animation: slowZoom 20s infinite alternate; }
-        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+        /* 頂級光暈背景（打造空間深度） */
+        .glow-bg {
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 60vw;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(0, 119, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-bg-2 {
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vh;
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-        /* U-Life 專屬色系 */
-        .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn-ulife { background: #1a1a1a; color: #fff; padding: 14px 32px; border-radius: 99px; font-weight: 700; transition: 0.4s; }
-        .btn-ulife:hover { background: #d4af37; transform: scale(1.05); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
+        /* 主視覺區（Apple 經典大膽留白） */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh;
+            text-align: center;
+            padding: 0 20px;
+        }
 
-        /* Banner 節奏修正 */
-        .banner-h-lg { min-height: 90vh; }
-        .banner-h-md { min-height: 60vh; }
-        
-        /* 六宮格微修：更細膩的 Apple 風格 */
-        .apple-box { background: #fbfbfd; border-radius: 32px; overflow: hidden; transition: 0.5s; }
-        .apple-box:hover { background: #f5f5f7; transform: translateY(-8px); }
+        .system-tag {
+            background: linear-gradient(90deg, #00ffcc, #0077ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0 0 20px 0;
+            background: linear-gradient(180deg, #ffffff 30%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #00ffcc, #0077ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 20px;
+            color: #86868b;
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        /* 蘋果工藝級按鈕（細膩漸層與微動態） */
+        .cta-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(255,255,255,0.1);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.03);
+            background: linear-gradient(90deg, #00ffcc, #0077ff);
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+        }
+
+        /* 商業模式矩陣卡片（毛玻璃 Glassmorphism） */
+        .matrix-section {
+            max-width: 1000px;
+            margin: 0 auto padding;
+            padding: 0 20px 100px 20px;
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: rgba(22, 22, 23, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 22px;
+            padding: 35px;
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 204, 0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+            color: #f5f5f7;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: #86868b;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* 手機板適應 RWD */
+        @media (max-width: 768px) {
+            h1 { font-size: 38px; }
+            .hero-desc { font-size: 17px; }
+            .card { padding: 25px; }
+        }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- 導航：質感白 -->
-    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-white/70 backdrop-blur-xl">
-        <div class="text-xl font-black tracking-tighter italic">U-Life <span class="font-light text-gray-300">SYSTEM</span></div>
-        <button onclick="window.open('https://line.me')" class="btn-ulife text-xs">預約諮詢</button>
-    </nav>
+    <div class="glow-bg"></div>
+    <div class="glow-bg-2"></div>
 
-    <!-- 1. Hero：電影化氣場 (負責吸引) -->
-    <section class="relative h-screen flex items-center overflow-hidden bg-black">
-        <div class="absolute inset-0 z-0 overflow-hidden">
-            <img src="ChatGPT Image 2026年5月13日 上午02_43_20.png" class="hero-zoom w-full h-full object-cover grayscale opacity-60">
-            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
-        </div>
-        <div class="relative z-20 container mx-auto px-10">
-            <p class="reveal text-xs font-black tracking-[0.5em] text-[#d4af37] mb-6 uppercase">The Reality of Future</p>
-            <h1 class="reveal text-5xl md:text-[100px] font-black tracking-tighter leading-[0.9] text-white mb-8">
-                實體店舖<br>AI 品牌轉型
-            </h1>
-            <p class="reveal text-white/50 text-lg md:text-xl font-medium mb-12 max-w-sm">讓您的店，不只是被看見，<br>而是被選擇。</p>
-            <button onclick="document.getElementById('banner-1').scrollIntoView({behavior:'smooth'})" class="reveal btn-ulife bg-white text-black">START EXPLORING</button>
-        </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="system-tag">U-Life Business System</div>
+        <h1>打破時間換錢的<br><span>全自動變現商業模式</span></h1>
+        <p class="hero-desc">結合實體店面、高含金量 AI 行銷工具與精準草本營養管理。不只開一家店，更是在打造一個能無上限自動運作的組織複利系統。</p>
+        <button class="cta-btn" onclick="scrollToMatrix()">探索系統核心</button>
     </section>
 
-    <!-- 2. Banner 1：AI 品牌官網 (長畫幅) -->
-    <section id="banner-1" class="banner-h-lg relative flex items-center p-10 md:p-32 bg-white">
-        <div class="max-w-4xl reveal">
-            <p class="text-xs font-bold text-gray-400 mb-4 uppercase tracking-widest">Digital Presence</p>
-            <h2 class="text-4xl md:text-7xl font-black mb-8 leading-tight">讓店鋪看起來像品牌，<br><span class="text-gray-300 italic">而不是普通店家。</span></h2>
-            <p class="text-gray-500 text-lg mb-12 max-w-md">我們不只做網頁，我們建立的是具備「真實世界感」的獲利閉環。</p>
-            <a href="#" class="text-black font-black border-b-2 border-black pb-1 hover:text-[#d4af37] hover:border-[#d4af37] transition uppercase text-xs">Learn More</a>
-        </div>
-    </section>
-
-    <!-- 3. Banner 2：AI 短影音 (中畫幅 + 沉浸感) -->
-    <section class="banner-h-md relative flex flex-col justify-center items-center text-center px-6 bg-gray-50">
-        <div class="reveal">
-            <h2 class="text-4xl md:text-6xl font-black mb-6">AI 短影音矩陣</h2>
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">讓內容穩定曝光，在顧客的滑動中，<br>植入您的品牌基因。</p>
-            <div class="w-20 h-[1px] bg-black mx-auto"></div>
-        </div>
-    </section>
-
-    <!-- 4. Banner 3：健康科技升級 (深色對比) -->
-    <section class="banner-h-lg relative flex items-end p-10 md:p-32 bg-black text-white overflow-hidden">
-        <img src="ChatGPT Image 2026年5月13日 上午02_43_20.png" class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale">
-        <div class="relative z-10 reveal">
-            <h2 class="text-4xl md:text-7xl font-black mb-6 gold-gradient">科技賦能</h2>
-            <p class="text-white/60 text-lg md:text-xl max-w-md mb-12">用設備與體驗，拉高客單與差異化。<br>讓技術老師的職業生涯，不再受限於體力。</p>
-            <button class="border border-white/20 px-8 py-3 rounded-full text-xs font-bold hover:bg-white hover:text-black transition uppercase">Discover Tech</button>
-        </div>
-    </section>
-
-    <!-- 5. 六宮格：豐富感與數據 (Apple Style) -->
-    <section class="py-32 px-4 md:px-8 bg-white">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 max-w-7xl mx-auto">
-            <div class="apple-box aspect-square flex flex-col justify-center p-10 reveal">
-                <span class="text-4xl font-black gold-gradient">38%</span>
-                <p class="text-[10px] font-bold text-gray-400 mt-4 uppercase">Google 商家成長</p>
+    <!-- 核心矩陣區塊 -->
+    <section class="matrix-section" id="matrix">
+        <div class="matrix-grid">
+            <!-- 卡片 1 -->
+            <div class="card">
+                <div class="card-icon">💈</div>
+                <h3>實體店面轉型</h3>
+                <p>針對蒸足、美體等實體空間，導入高留存體驗機制。擺脫地域與傳統勞力限制，將過路客迅速轉化為終身訂閱制會員。</p>
             </div>
-            <div class="apple-box aspect-square flex flex-col justify-center p-10 reveal" style="transition-delay: 0.1s">
-                <span class="text-4xl font-black gold-gradient">50K+</span>
-                <p class="text-[10px] font-bold text-gray-400 mt-4 uppercase">IG Reels 曝光</p>
+            <!-- 卡片 2 -->
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>AI 矩陣引流</h3>
+                <p>客製化免輸入「無限文案生成系統」。一鍵精準擊中現代人濕氣、燃脂、解壓痛點，讓你的社群直接變成自動獲取名單的印鈔機。</p>
             </div>
-            <div class="apple-box aspect-square flex flex-col justify-center p-10 reveal" style="transition-delay: 0.2s">
-                <span class="text-4xl font-black gold-gradient">$2,500</span>
-                <p class="text-[10px] font-bold text-gray-400 mt-4 uppercase">客單價提升</p>
-            </div>
-            <div class="apple-box col-span-2 md:col-span-1 p-10 flex flex-col justify-center reveal">
-                <h4 class="font-black text-lg mb-4 italic">技術老師轉型案</h4>
-                <p class="text-gray-400 text-xs leading-relaxed">從體力勞動到科技獲利的實踐。</p>
-            </div>
-            <div class="apple-box p-10 flex flex-col justify-center bg-zinc-900 text-white reveal">
-                <h4 class="font-black text-lg mb-4 gold-gradient">立即對接</h4>
-                <p class="text-white/40 text-[10px] mb-6 tracking-widest">START YOUR JOURNEY</p>
-                <button onclick="window.open('https://line.me')" class="text-xs border-b border-white pb-1 w-fit">點擊諮詢</button>
-            </div>
-            <div class="apple-box p-10 flex flex-col justify-center reveal">
-                <h4 class="font-black text-lg mb-4">實體店改造</h4>
-                <i class="fa-solid fa-arrow-right-long text-gray-200"></i>
+            <!-- 卡片 3 -->
+            <div class="card">
+                <div class="card-icon">📈</div>
+                <h3>組織複利變現</h3>
+                <p>結合三分練、七分吃的世界級營養體系。將工具作為吸引同業加盟、培訓下線的獨家贈品，實現多維度被動收入增長。</p>
             </div>
         </div>
     </section>
-
-    <!-- 6. Founder Story：真實的力量 -->
-    <section class="py-40 bg-white px-8 container mx-auto">
-        <div class="flex flex-col md:flex-row items-center gap-20 reveal">
-            <div class="w-full md:w-1/2">
-                <div class="relative group">
-                    <img src="ChatGPT Image 2026年5月13日 上午02_43_20.png" class="rounded-[40px] grayscale filter brightness-75 group-hover:brightness-100 transition duration-700">
-                    <div class="absolute -bottom-6 -right-6 bg-black text-white p-8 rounded-2xl hidden md:block">
-                        <p class="text-xs font-light italic">"這不是一場生意，<br>這是一次自我的救贖。"</p>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full md:w-1/2">
-                <p class="text-xs font-black tracking-[0.5em] text-gray-300 mb-8 uppercase">Founder's Belief</p>
-                <h2 class="text-4xl font-black mb-10 leading-tight">我看過實體店最輝煌的年代，<br>也看過他們在沈默中沒落。</h2>
-                <p class="text-gray-500 leading-relaxed text-lg font-light mb-10">
-                    我看過美業老師因體力透支而被迫關店，也看過店長在數據海中迷失方向。U-Life 的誕生，是為了解決那種「擁有好技術卻沒人看見」的無奈。<br><br>
-                    這不只是 AI，這是為了讓您的技術，以最尊嚴的方式存在於數位時代。
-                </p>
-                <div class="flex items-center gap-6">
-                    <div class="w-12 h-[1px] bg-black"></div>
-                    <span class="text-xs font-black tracking-widest italic">ZI-TONG / U-Life Director</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. 最後 CTA -->
-    <section class="py-60 text-center px-6">
-        <h2 class="reveal text-4xl md:text-7xl font-black mb-16 tracking-tight">讓你的店，不只是被看見，<br><span class="gold-gradient">而是被選擇。</span></h2>
-        <button onclick="window.open('https://line.me')" class="reveal btn-ulife px-24 py-6 text-xl">預約私密諮詢</button>
-    </section>
-
-    <footer class="py-12 text-center text-[10px] font-black text-gray-300 tracking-[0.5em] uppercase border-t border-gray-50">
-        U-LIFE HEALTH SYSTEM / LESS IS LUXURY
-    </footer>
 
     <script>
-        // 簡單的捲動偵測
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        function scrollToMatrix() {
+            document.getElementById('matrix').scrollIntoView({ behavior: 'smooth' });
+        }
     </script>
+
 </body>
 </html>
